@@ -1,7 +1,7 @@
 {
   "name": "og-ui-library",
   "author": "Brandon Shea <bsshea5@gmail.com>",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
@@ -10,6 +10,7 @@
     "@babel/core": "^7.15.5",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-replace": "^3.0.0",
     "@storybook/addon-actions": "^6.3.8",
     "@storybook/addon-essentials": "^6.3.8",
     "@storybook/addon-links": "^6.3.8",

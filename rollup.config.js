@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
+import replace from "@rollup/plugin-replace";
 
 const packageJson = require("./package.json");
 
@@ -29,6 +30,11 @@ export default {
     },
   ],
   plugins: [
+    replace({
+      "Object.defineProperty(exports, '__esModule', { value: true });": "",
+      delimiters: ["\n", "\n"],
+      preventAssignment: false,
+    }),
     peerDepsExternal(),
     resolve(),
     commonjs(),
