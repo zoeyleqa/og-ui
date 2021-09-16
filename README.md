@@ -13,3 +13,11 @@ Followed this tutorial to get started: https://prateeksurana.me/blog/react-compo
 ## Build
 
 > yarn build
+
+## Version
+
+> npm version <patch | major | minor>
+
+## Publish
+
+> npm publish
