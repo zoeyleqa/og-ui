@@ -18,7 +18,7 @@ export default {
     {
       file: packageJson.main,
       format: "umd",
-      name: packageJson.name,
+      name: "OgUiLib",
     },
   ],
   plugins: [
