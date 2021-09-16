@@ -1,10 +1,7 @@
 {
   "name": "og-ui-library",
-  "author": {
-    "email": "bsshea5@gmail.com",
-    "name": "Brandon Shea"
-  },
-  "version": "0.1.0",
+  "author": "Brandon Shea <bsshea5@gmail.com>",
+  "version": "0.1.1",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
@@ -40,5 +37,16 @@
   },
   "files": [
     "/lib"
+  ],
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git@10.150.36.85:oak-grove/og-ui.git"
+  },
+  "keywords": [
+    "ui",
+    "react",
+    "javascript",
+    "typescript"
   ]
 }
