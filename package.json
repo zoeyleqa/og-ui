@@ -1,7 +1,7 @@
 {
   "name": "og-ui-library",
   "author": "Brandon Shea <bsshea5@gmail.com>",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
