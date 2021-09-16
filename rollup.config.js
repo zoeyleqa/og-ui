@@ -21,6 +21,12 @@ export default {
       format: "esm",
       sourcemap: true,
     },
+    {
+      file: "umd/bundle.js",
+      format: "umd",
+      sourcemap: true,
+      name: "og-ui-umd",
+    },
   ],
   plugins: [
     peerDepsExternal(),

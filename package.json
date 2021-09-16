@@ -36,7 +36,8 @@
     "build": "rollup -c"
   },
   "files": [
-    "/lib"
+    "/lib",
+    "/umd"
   ],
   "description": "",
   "repository": {
