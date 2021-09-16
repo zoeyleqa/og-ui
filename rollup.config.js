@@ -3,7 +3,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
-import replace from "@rollup/plugin-replace";
 
 const packageJson = require("./package.json");
 
@@ -13,28 +12,16 @@ export default {
   // output key indicates what types of output files will be generated at which place
   output: [
     {
-      file: packageJson.main,
-      format: "cjs",
-      sourcemap: true,
-    },
-    {
       file: packageJson.module,
       format: "esm",
-      sourcemap: true,
     },
     {
-      file: "umd/bundle.js",
+      file: packageJson.main,
       format: "umd",
-      sourcemap: true,
-      name: "og-ui-umd",
+      name: packageJson.name,
     },
   ],
   plugins: [
-    replace({
-      "Object.defineProperty(exports, '__esModule', { value: true });": "",
-      delimiters: ["\n", "\n"],
-      preventAssignment: false,
-    }),
     peerDepsExternal(),
     resolve(),
     commonjs(),

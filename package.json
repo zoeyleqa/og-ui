@@ -2,7 +2,7 @@
   "name": "og-ui-library",
   "author": "Brandon Shea <bsshea5@gmail.com>",
   "version": "0.3.2",
-  "main": "lib/index.js",
+  "main": "dist/og-ui-library.umd.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -38,7 +38,7 @@
   },
   "files": [
     "/lib",
-    "/umd"
+    "/dist"
   ],
   "description": "",
   "repository": {
