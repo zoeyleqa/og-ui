@@ -3,10 +3,6 @@ import "./button.css";
 
 export interface ButtonProps {
   /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean;
-  /**
    * What background color to use
    */
   backgroundColor?: string;
@@ -18,6 +14,7 @@ export interface ButtonProps {
    * Button contents
    */
   label: string;
+  mode: string;
   /**
    * Optional click handler
    */
@@ -28,21 +25,20 @@ export interface ButtonProps {
  * Primary UI component for user interaction
  */
 const Button = ({
-  primary = true,
   backgroundColor,
   size = "medium",
   onClick,
   label,
+  mode
 }: ButtonProps) => {
-  const mode = primary
-    ? "storybook-button--primary"
-    : "storybook-button--secondary";
   return (
     <button
       type="button"
-      className={["storybook-button", `storybook-button--${size}`, mode].join(
-        " "
-      )}
+      className={[
+        "storybook-button",
+        `storybook-button--${size}`,
+        `storybook-button--${mode}`
+      ].join(" ")}
       style={backgroundColor ? { backgroundColor } : {}}
       onClick={onClick}
     >

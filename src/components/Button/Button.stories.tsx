@@ -16,10 +16,13 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 // Reuse that template for creating different stories
 export const Primary = Template.bind({});
-Primary.args = { label: "Primary 😃", size: "large" };
+Primary.args = { label: "Primary 😃", size: "large", mode: "primary"};
 
 export const Secondary = Template.bind({});
-Secondary.args = { ...Primary.args, primary: false, label: "Secondary 😇" };
+Secondary.args = { ...Primary.args, label: "Secondary 😇", mode: "secondary" };
+
+export const Success = Template.bind({});
+Success.args = { size: "large", label: "Success 😇", mode: "success" };
 
 export const Empty = Template.bind({});
 Empty.args = {};

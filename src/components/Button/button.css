@@ -16,6 +16,12 @@
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
 }
+.storybook-button--success {
+  color: white;
+  background-color: rgb(20, 108, 67);
+  border-color: rgb(32, 175, 109);
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; */
+}
 .storybook-button--small {
   font-size: 12px;
   padding: 10px 16px;
