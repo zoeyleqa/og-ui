@@ -1,0 +1,470 @@
+[
+  {
+    "id": 1,
+    "role": "OPFOR",
+    "description": "Opposing Force Role Player",
+    "pay": 225
+  },
+  {
+    "id": 2,
+    "role": "O/C SF",
+    "description": "Observer Controller Special Forces",
+    "pay": 375
+  },
+  {
+    "id": 3,
+    "role": "HN/PN",
+    "description": "Host Nation/Partner Nation Role Player",
+    "pay": 225
+  },
+  {
+    "id": 4,
+    "role": "COB",
+    "description": "Civilian on the battlefield role player",
+    "pay": 250
+  },
+  {
+    "id": 5,
+    "role": "G-CHIEF",
+    "description": "Guerrilla Chief Role Player",
+    "pay": 422
+  },
+  {
+    "id": 6,
+    "role": "ASST. G-CHIEF",
+    "description": "Assistant Guerrilla Chief Role Player",
+    "pay": 375
+  },
+  {
+    "id": 7,
+    "role": "GUERRILLA",
+    "description": "Guerrilla Role Player ",
+    "pay": 225
+  },
+  {
+    "id": 8,
+    "role": "LOG RUNNER/DRIVER",
+    "description": "Logistics Support Personnel",
+    "pay": 275
+  },
+  {
+    "id": 9,
+    "role": "O/C PS",
+    "description": "Observer Controller / Point Sitter",
+    "pay": 300
+  },
+  {
+    "id": 10,
+    "role": "COMMUNICATOR",
+    "description": "Outstation Communicator",
+    "pay": 275
+  },
+  {
+    "id": 12,
+    "role": "G-CHIEF 18A",
+    "description": "Guerrilla Chief for 18A UW exercise",
+    "pay": 375
+  },
+  {
+    "id": 13,
+    "role": "ASST. G-CHIEF 18A",
+    "description": "Assistant Guerrilla Chief for the 18A UW exercise",
+    "pay": 350
+  },
+  {
+    "id": 14,
+    "role": "FID PDSS TEAM - 18A",
+    "description": "Team members for the 18A FID PDSS",
+    "pay": 225
+  },
+  {
+    "id": 15,
+    "role": "CO. COMMANDER - 18A",
+    "description": "Company Commander for 18A FID/UW",
+    "pay": 350
+  },
+  {
+    "id": 16,
+    "role": "ROLE PLAYER SUPERVISOR",
+    "description": "Assistant to the site manager for managing role player duties",
+    "pay": 350
+  },
+  {
+    "id": 17,
+    "role": "EMBASSY STAFF - IAPX",
+    "description": "Embassay staff and IAPX support positions",
+    "pay": 374
+  },
+  {
+    "id": 19,
+    "role": "OGT GENERIC",
+    "description": "Default Placeholder Role",
+    "pay": 0
+  },
+  {
+    "id": 25,
+    "role": "US AMBASSADOR",
+    "description": "United States Ambassador",
+    "pay": 1000
+  },
+  {
+    "id": 54,
+    "role": "O/C ASO",
+    "description": "Observer Controller ASO",
+    "pay": 375
+  },
+  {
+    "id": 55,
+    "role": "DIPLOMATIC OFFICER",
+    "description": "Embassy Staff - JRTC",
+    "pay": 500
+  },
+  {
+    "id": 56,
+    "role": "US CHIEF OF MISSION",
+    "description": "US Embassy Chief of Mission",
+    "pay": 900
+  },
+  {
+    "id": 59,
+    "role": "G-CHIEF MISO",
+    "description": "Guerrilla Chief for MISO Black Knight Exercise",
+    "pay": 325
+  },
+  {
+    "id": 61,
+    "role": "COB - SFAS",
+    "description": "SFAS Officer Engagement Role Player",
+    "pay": 225
+  },
+  {
+    "id": 62,
+    "role": "EMBASSY STAFF - MISG",
+    "description": "Embassy Staff and MISG support positions",
+    "pay": 435
+  },
+  {
+    "id": 63,
+    "role": "US CHIEF OF STATION",
+    "description": "US CHIEF OF STATION",
+    "pay": 500
+  },
+  {
+    "id": 64,
+    "role": "Script Writer",
+    "description": "Script Writer",
+    "pay": 0
+  },
+  {
+    "id": 65,
+    "role": "TSOC Commander",
+    "description": "TSOC Commander UWEX",
+    "pay": 1500
+  },
+  {
+    "id": 66,
+    "role": "Defense Attache",
+    "description": "Defense Attache UWEX",
+    "pay": 500
+  },
+  {
+    "id": 67,
+    "role": "Chief of Operations",
+    "description": "Chief of Operions OGA UWEX",
+    "pay": 500
+  },
+  {
+    "id": 68,
+    "role": "Department of Justice",
+    "description": "DOJ RP UWEX",
+    "pay": 500
+  },
+  {
+    "id": 69,
+    "role": "Department of State",
+    "description": "DOS RP UWEX",
+    "pay": 500
+  },
+  {
+    "id": 70,
+    "role": "Host Nation Foreign Intelligence",
+    "description": "HNFI RP UWEX",
+    "pay": 500
+  },
+  {
+    "id": 71,
+    "role": "USAID Role Player",
+    "description": "USAID RP UWEX",
+    "pay": 375
+  },
+  {
+    "id": 72,
+    "role": "NGO Role Player",
+    "description": "NGO RP UWEX",
+    "pay": 375
+  },
+  {
+    "id": 73,
+    "role": "Asset/Source",
+    "description": "Asset/Source UWEX",
+    "pay": 250
+  },
+  {
+    "id": 74,
+    "role": "Resistance Force Area Commander",
+    "description": "Resistance Force Area CDR UWEX",
+    "pay": 427
+  },
+  {
+    "id": 75,
+    "role": "Auxiliary Leader",
+    "description": "Auxiliary Leader UWEX",
+    "pay": 375
+  },
+  {
+    "id": 76,
+    "role": "Underground Leader",
+    "description": "Underground Leader UWEX",
+    "pay": 375
+  },
+  {
+    "id": 77,
+    "role": "Media and News Writer",
+    "description": "Media and News Writer RP UWEX",
+    "pay": 375
+  },
+  {
+    "id": 78,
+    "role": "Government Role Player",
+    "description": "GOV RP UWEX",
+    "pay": 375
+  },
+  {
+    "id": 79,
+    "role": "Financier Role Player",
+    "description": "Financier RP UWEX",
+    "pay": 427
+  },
+  {
+    "id": 80,
+    "role": "ASOT RP",
+    "description": "ASOT Role Player",
+    "pay": 300
+  },
+  {
+    "id": 81,
+    "role": "Script Writer",
+    "description": "MARSOC",
+    "pay": 500
+  },
+  {
+    "id": 82,
+    "role": "HN Driver",
+    "description": "MARSOC",
+    "pay": 375
+  },
+  {
+    "id": 83,
+    "role": "HN LE LNO",
+    "description": "MARSOC",
+    "pay": 375
+  },
+  {
+    "id": 84,
+    "role": "HN MIL LNO",
+    "description": "MARSOC",
+    "pay": 375
+  },
+  {
+    "id": 85,
+    "role": "CI (MSO CAT 1)",
+    "description": "MARSOC",
+    "pay": 400
+  },
+  {
+    "id": 86,
+    "role": "ASOT (L3)",
+    "description": "Source Operatons ",
+    "pay": 350
+  },
+  {
+    "id": 87,
+    "role": "SURV",
+    "description": "Surveillance",
+    "pay": 350
+  },
+  {
+    "id": 88,
+    "role": "AUX",
+    "description": "Auxiliary",
+    "pay": 300
+  },
+  {
+    "id": 89,
+    "role": "SERE COB",
+    "description": "Civilian on the Battlefield",
+    "pay": 150
+  },
+  {
+    "id": 90,
+    "role": "Deputy Chief of Mission",
+    "description": "Embassy Staff",
+    "pay": 1
+  },
+  {
+    "id": 91,
+    "role": "INL Director",
+    "description": "Embassy Staff",
+    "pay": 455
+  },
+  {
+    "id": 92,
+    "role": "Security Cooperation Officer",
+    "description": "Embassy Staff",
+    "pay": 455
+  },
+  {
+    "id": 93,
+    "role": "Public Affairs Officer",
+    "description": "Embassy Staff",
+    "pay": 455
+  },
+  {
+    "id": 94,
+    "role": "RSO",
+    "description": "Regional Security Officer",
+    "pay": 450
+  },
+  {
+    "id": 95,
+    "role": "Contracting Rep",
+    "description": "Contracting Rep MRX ",
+    "pay": 325
+  },
+  {
+    "id": 96,
+    "role": "PATL",
+    "description": "Provincial Augmentation Team Leader",
+    "pay": 450
+  },
+  {
+    "id": 97,
+    "role": "DEA Agent",
+    "description": "DEA Agent",
+    "pay": 450
+  },
+  {
+    "id": 98,
+    "role": "SDO",
+    "description": "Senior Defense Official ",
+    "pay": 450
+  },
+  {
+    "id": 99,
+    "role": "Intel SME",
+    "description": "",
+    "pay": 500
+  },
+  {
+    "id": 100,
+    "role": "Joint Task Force CDR",
+    "description": "",
+    "pay": 500
+  },
+  {
+    "id": 101,
+    "role": "AFO ",
+    "description": "",
+    "pay": 500
+  },
+  {
+    "id": 102,
+    "role": "Joint Planning Advisor",
+    "description": "",
+    "pay": 700
+  },
+  {
+    "id": 103,
+    "role": "PN Info Operations Officer",
+    "description": "",
+    "pay": 400
+  },
+  {
+    "id": 104,
+    "role": "Senior Villager ",
+    "description": "",
+    "pay": 325
+  },
+  {
+    "id": 105,
+    "role": "Tactical Unit Commander",
+    "description": "",
+    "pay": 325
+  },
+  {
+    "id": 106,
+    "role": "PN Media Cell ",
+    "description": "",
+    "pay": 325
+  },
+  {
+    "id": 107,
+    "role": "Translator",
+    "description": "",
+    "pay": 325
+  },
+  {
+    "id": 108,
+    "role": "Chief of Mission",
+    "description": "Chief of Mission ",
+    "pay": 800
+  },
+  {
+    "id": 109,
+    "role": "SCO",
+    "description": "Security Cooperations Officer ",
+    "pay": 450
+  },
+  {
+    "id": 110,
+    "role": "SICFWD CDR",
+    "description": "Special Op Command Foward Commander ",
+    "pay": 450
+  },
+  {
+    "id": 111,
+    "role": "Scenario Developer ",
+    "description": "Scenario Developer ",
+    "pay": 450
+  },
+  {
+    "id": 112,
+    "role": "FLEA",
+    "description": "Federal Law Enforcement Agent",
+    "pay": 450
+  },
+  {
+    "id": 113,
+    "role": "Exercise Support ",
+    "description": "Exercise Support ",
+    "pay": 0
+  },
+  {
+    "id": 114,
+    "role": "HN/PH II",
+    "description": "Half Day Pay",
+    "pay": 150
+  },
+  {
+    "id": 115,
+    "role": "Film Screening/Speaker",
+    "description": "",
+    "pay": 1500
+  },
+  {
+    "id": 116,
+    "role": "PN Commander",
+    "description": "",
+    "pay": 325
+  }
+]
