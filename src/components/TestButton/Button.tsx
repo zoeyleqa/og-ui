@@ -1,10 +1,12 @@
+import React from "react";
 import { Button as BSButton } from "react-bootstrap";
 import { IconLabel } from "../Icons/IconLabel";
 import btnVariant from "./variant";
-import "./button.css";
-import React from "react";
 
 export interface ButtonProps {
+  /**
+   * How large should the button be?
+   */
   size?: "sm" | "lg";
   type?: string;
   /**
@@ -14,38 +16,26 @@ export interface ButtonProps {
   /**
    * Optional click handler
    */
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
-  loading?: boolean;
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
+export const TestButton = ({
   size = "sm",
   type = "loader",
   onClick,
   label = "",
-  loading = false,
   disabled = false,
   ...rest
 }: ButtonProps) => {
   const btn = btnVariant[type];
 
   return (
-    <BSButton
-      size={size}
-      variant={btn.variant}
-      onClick={onClick}
-      disabled={disabled || loading}
-      {...rest}
-    >
-      {loading ? (
-        <IconLabel label={label || btn.loadingText} awesomeIcon="spin" />
-      ) : (
-        <IconLabel label={label || btn.label} awesomeIcon={btn.awesomeIcon} />
-      )}
+    <BSButton size={size} variant={btn.variant} onClick={onClick} {...rest}>
+      <IconLabel label={label || btn.label} awesomeIcon={btn.awesomeIcon} />
     </BSButton>
   );
 };

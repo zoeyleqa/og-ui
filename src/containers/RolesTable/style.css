@@ -1,0 +1,12 @@
+.offcanvas.offcanvas-end {
+  width: 40vw;
+  min-width: 550px;
+}
+
+form > button {
+  float: right;
+}
+
+button ~ button {
+  margin-left: 10px;
+}

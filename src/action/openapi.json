@@ -1,0 +1,1179 @@
+{
+  "openapi": "3.0.2",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Login",
+        "operationId": "login_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": { "$ref": "#/components/schemas/Body_login_login_post" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Token" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create",
+        "operationId": "create_users_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Show",
+        "operationId": "show_users__id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Id", "type": "integer" },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attendees": {
+      "get": {
+        "tags": ["Attendees"],
+        "summary": "Get All",
+        "operationId": "route_attendees_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer", "default": 250 },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Attendees Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AttendeeRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Attendees"],
+        "summary": "Create One",
+        "operationId": "route_attendees_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AttendeeCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AttendeeRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Attendees"],
+        "summary": "Delete All",
+        "operationId": "route_attendees_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Attendees Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AttendeeRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attendees/{item_id}": {
+      "get": {
+        "tags": ["Attendees"],
+        "summary": "Get One",
+        "operationId": "route_attendees__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AttendeeRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Attendees"],
+        "summary": "Update One",
+        "operationId": "route_attendees__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AttendeeReadUpdate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AttendeeRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Attendees"],
+        "summary": "Delete One",
+        "operationId": "route_attendees__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AttendeeRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/roles": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get All",
+        "operationId": "route_roles_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Roles Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/RoleRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Roles"],
+        "summary": "Create One",
+        "operationId": "route_roles_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RoleCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RoleRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Roles"],
+        "summary": "Delete All",
+        "operationId": "route_roles_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Roles Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/RoleRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/roles/{item_id}": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get One",
+        "operationId": "route_roles__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RoleRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Roles"],
+        "summary": "Update One",
+        "operationId": "route_roles__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RoleReadUpdate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RoleRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Roles"],
+        "summary": "Delete One",
+        "operationId": "route_roles__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RoleRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/languages": {
+      "get": {
+        "tags": ["Languages"],
+        "summary": "Get All",
+        "operationId": "route_languages_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Languages Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/LanguageRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Languages"],
+        "summary": "Create One",
+        "operationId": "route_languages_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LanguageCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LanguageRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Languages"],
+        "summary": "Delete All",
+        "operationId": "route_languages_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Languages Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/LanguageRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/languages/{item_id}": {
+      "get": {
+        "tags": ["Languages"],
+        "summary": "Get One",
+        "operationId": "route_languages__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LanguageRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Languages"],
+        "summary": "Update One",
+        "operationId": "route_languages__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LanguageReadUpdate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LanguageRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Languages"],
+        "summary": "Delete One",
+        "operationId": "route_languages__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LanguageRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/languagecategories": {
+      "get": {
+        "tags": ["Languagecategories"],
+        "summary": "Get All",
+        "operationId": "route_languagecategories_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Languagecategories Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LanguageCategoryRead"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Languagecategories"],
+        "summary": "Create One",
+        "operationId": "route_languagecategories_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LanguageCategoryCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguageCategoryRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Languagecategories"],
+        "summary": "Delete All",
+        "operationId": "route_languagecategories_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Languagecategories Delete",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LanguageCategoryRead"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/languagecategories/{item_id}": {
+      "get": {
+        "tags": ["Languagecategories"],
+        "summary": "Get One",
+        "operationId": "route_languagecategories__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguageCategoryRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Languagecategories"],
+        "summary": "Update One",
+        "operationId": "route_languagecategories__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LanguageCategoryReadUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguageCategoryRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Languagecategories"],
+        "summary": "Delete One",
+        "operationId": "route_languagecategories__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguageCategoryRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AttendeeCreate": {
+        "title": "AttendeeCreate",
+        "required": [
+          "first_name",
+          "middle_name",
+          "last_name",
+          "email",
+          "street",
+          "city",
+          "state",
+          "country_code",
+          "status",
+          "is_us_citizen"
+        ],
+        "type": "object",
+        "properties": {
+          "first_name": { "title": "First Name", "type": "string" },
+          "middle_name": { "title": "Middle Name", "type": "string" },
+          "last_name": { "title": "Last Name", "type": "string" },
+          "email": { "title": "Email", "type": "string" },
+          "street": { "title": "Street", "type": "string" },
+          "city": { "title": "City", "type": "string" },
+          "state": { "title": "State", "type": "string" },
+          "country_code": { "title": "Country Code", "type": "string" },
+          "status": { "title": "Status", "type": "string" },
+          "is_us_citizen": { "title": "Is Us Citizen", "type": "boolean" }
+        }
+      },
+      "AttendeeRead": {
+        "title": "AttendeeRead",
+        "required": [
+          "first_name",
+          "middle_name",
+          "last_name",
+          "email",
+          "street",
+          "city",
+          "state",
+          "country_code",
+          "status",
+          "is_us_citizen",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "first_name": { "title": "First Name", "type": "string" },
+          "middle_name": { "title": "Middle Name", "type": "string" },
+          "last_name": { "title": "Last Name", "type": "string" },
+          "email": { "title": "Email", "type": "string" },
+          "street": { "title": "Street", "type": "string" },
+          "city": { "title": "City", "type": "string" },
+          "state": { "title": "State", "type": "string" },
+          "country_code": { "title": "Country Code", "type": "string" },
+          "status": { "title": "Status", "type": "string" },
+          "is_us_citizen": { "title": "Is Us Citizen", "type": "boolean" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "AttendeeReadUpdate": {
+        "title": "AttendeeReadUpdate",
+        "required": [
+          "first_name",
+          "middle_name",
+          "last_name",
+          "email",
+          "street",
+          "city",
+          "state",
+          "country_code",
+          "status",
+          "is_us_citizen"
+        ],
+        "type": "object",
+        "properties": {
+          "first_name": { "title": "First Name", "type": "string" },
+          "middle_name": { "title": "Middle Name", "type": "string" },
+          "last_name": { "title": "Last Name", "type": "string" },
+          "email": { "title": "Email", "type": "string" },
+          "street": { "title": "Street", "type": "string" },
+          "city": { "title": "City", "type": "string" },
+          "state": { "title": "State", "type": "string" },
+          "country_code": { "title": "Country Code", "type": "string" },
+          "status": { "title": "Status", "type": "string" },
+          "is_us_citizen": { "title": "Is Us Citizen", "type": "boolean" }
+        }
+      },
+      "Body_login_login_post": {
+        "title": "Body_login_login_post",
+        "required": ["username", "password"],
+        "type": "object",
+        "properties": {
+          "grant_type": {
+            "title": "Grant Type",
+            "pattern": "password",
+            "type": "string"
+          },
+          "username": { "title": "Username", "type": "string" },
+          "password": { "title": "Password", "type": "string" },
+          "scope": { "title": "Scope", "type": "string", "default": "" },
+          "client_id": { "title": "Client Id", "type": "string" },
+          "client_secret": { "title": "Client Secret", "type": "string" }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ValidationError" }
+          }
+        }
+      },
+      "LanguageCategoryCreate": {
+        "title": "LanguageCategoryCreate",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" }
+        }
+      },
+      "LanguageCategoryRead": {
+        "title": "LanguageCategoryRead",
+        "required": ["name", "id"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "LanguageCategoryReadUpdate": {
+        "title": "LanguageCategoryReadUpdate",
+        "required": ["name", "description"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" }
+        }
+      },
+      "LanguageCreate": {
+        "title": "LanguageCreate",
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "comment": { "title": "Comment", "type": "string" }
+        }
+      },
+      "LanguageRead": {
+        "title": "LanguageRead",
+        "required": ["name", "id"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "comment": { "title": "Comment", "type": "string" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "LanguageReadUpdate": {
+        "title": "LanguageReadUpdate",
+        "required": ["name", "comment"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "comment": { "title": "Comment", "type": "string" }
+        }
+      },
+      "RoleCreate": {
+        "title": "RoleCreate",
+        "required": ["name", "description", "pay"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "pay": { "title": "Pay", "type": "number" }
+        }
+      },
+      "RoleRead": {
+        "title": "RoleRead",
+        "required": ["name", "description", "pay", "id"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "pay": { "title": "Pay", "type": "number" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "RoleReadUpdate": {
+        "title": "RoleReadUpdate",
+        "required": ["name", "description", "pay"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "pay": { "title": "Pay", "type": "number" }
+        }
+      },
+      "Token": {
+        "title": "Token",
+        "required": ["access_token", "token_type"],
+        "type": "object",
+        "properties": {
+          "access_token": { "title": "Access Token", "type": "string" },
+          "token_type": { "title": "Token Type", "type": "string" }
+        }
+      },
+      "UserCreate": {
+        "title": "UserCreate",
+        "required": [
+          "username",
+          "first_name",
+          "last_name",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "username": { "title": "Username", "type": "string" },
+          "first_name": { "title": "First Name", "type": "string" },
+          "last_name": { "title": "Last Name", "type": "string" },
+          "email": { "title": "Email", "type": "string" },
+          "password": { "title": "Password", "type": "string" },
+          "admin": { "title": "Admin", "type": "boolean", "default": false }
+        }
+      },
+      "UserRead": {
+        "title": "UserRead",
+        "required": [
+          "username",
+          "first_name",
+          "last_name",
+          "email",
+          "password",
+          "id",
+          "last_sign_in"
+        ],
+        "type": "object",
+        "properties": {
+          "username": { "title": "Username", "type": "string" },
+          "first_name": { "title": "First Name", "type": "string" },
+          "last_name": { "title": "Last Name", "type": "string" },
+          "email": { "title": "Email", "type": "string" },
+          "password": { "title": "Password", "type": "string" },
+          "admin": { "title": "Admin", "type": "boolean", "default": false },
+          "id": { "title": "Id", "type": "integer" },
+          "last_sign_in": {
+            "title": "Last Sign In",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "msg": { "title": "Message", "type": "string" },
+          "type": { "title": "Error Type", "type": "string" }
+        }
+      }
+    }
+  }
+}
