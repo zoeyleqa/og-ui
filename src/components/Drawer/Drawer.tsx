@@ -15,7 +15,7 @@ const position: pos = {
 };
 
 interface DrawerProps {
-  id: number;
+  id: string | number;
   title?: string;
   drawerPos?: any;
   show: boolean;

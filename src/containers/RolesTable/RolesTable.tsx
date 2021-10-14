@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ActionCell } from "./ActionButtonsCell";
+import { AddRoleButton } from "./AddRoleButton";
 import { BaseTable } from "../BaseTable";
 import { RestfulProvider } from "restful-react";
 import {
   useRouteRolesGet,
+  useRouteRolesPost,
   useRouteRolesItemIdPut,
   useRouteRolesItemIdDelete
 } from "../../action/actions";
@@ -24,7 +26,10 @@ export const roleTableHeader = [
   }
 ];
 
-const actionButtons = (updateRow: (rowIndex: any, rowValue: any) => void) => ({
+const actionButtons = (
+  updateRow: (rowIndex: any, rowValue: any) => void,
+  deleteRow: (rowIndex: any) => void
+) => ({
   id: "Actions",
   Header: "Actions",
   accessor: "action-buttons",
@@ -35,6 +40,7 @@ const actionButtons = (updateRow: (rowIndex: any, rowValue: any) => void) => ({
       editHandler={useRouteRolesItemIdPut}
       updateRow={updateRow}
       deleteHandler={useRouteRolesItemIdDelete}
+      deleteRow={deleteRow}
     />
   ),
   sortable: false
@@ -46,7 +52,10 @@ const RolesDataTable = () => {
   const [roleData, setRoleData] = useState<any[] | null>(null);
 
   useEffect(() => {
-    if (!loading) setRoleData(roleOriginalData);
+    if (!loading) {
+      setRoleData(roleOriginalData);
+      roleTableHeader.push(actionButtons(updateData, deleteRole));
+    }
   }, [loading]);
 
   useEffect(() => {
@@ -67,8 +76,6 @@ const RolesDataTable = () => {
         ? old
         : old.map((row, index) => {
             if (index === parseInt(rowIndex)) {
-              console.log("index " + index);
-              console.log("rowid " + rowIndex);
               return {
                 ...rowValue
               };
@@ -78,16 +85,33 @@ const RolesDataTable = () => {
     );
   };
 
-  if (!loading && roleData) {
-    roleTableHeader.push(actionButtons(updateData));
+  const deleteRole = (rowIndex: any) => {
+    skipResetRef.current = true;
+    setRoleData((old: any[] | null) =>
+      !old
+        ? old
+        : old.filter((_, index) => {
+            return index !== rowIndex;
+          })
+    );
+  };
 
+  const addRole = (row: any) => {
+    skipResetRef.current = true;
+    setRoleData((old: any[] | null) => (!old ? [row] : [...old, row]));
+  };
+
+  if (!loading && roleData) {
     return (
-      <BaseTable
-        data={roleData}
-        header={roleTableHeader}
-        updateMyData={updateData}
-        skipReset={skipResetRef}
-      />
+      <>
+        <AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />
+        <BaseTable
+          data={roleData}
+          header={roleTableHeader}
+          updateMyData={updateData}
+          skipReset={skipResetRef}
+        />
+      </>
     );
   }
 

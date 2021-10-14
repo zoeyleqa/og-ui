@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../../components/Button";
-import { ModalDialog } from "../../components/ModalDialog";
 import { Drawer } from "../../components/Drawer";
+import { DeleteRoleModal } from "./DeleteRoleModal";
 import { EditRoleForm } from "./EditRoleForm";
 
 interface ActionCellProps {
@@ -10,6 +10,7 @@ interface ActionCellProps {
   editHandler: any;
   updateRow: any;
   deleteHandler: any;
+  deleteRow: any;
   disabled?: false;
 }
 
@@ -20,31 +21,22 @@ export const ActionCell = ({
   editHandler,
   updateRow,
   deleteHandler,
+  deleteRow,
   disabled = false
 }: ActionCellProps) => {
   const [showEditPanel, setEditPanel] = useState(false);
   const [showDeletePanel, setDeletePanel] = useState(false);
-  const [modalLoading, setModalLoading] = useState(false);
 
   const roleId = parseInt(row.id);
 
-  const toggleLoading = () => setModalLoading(!modalLoading);
   const toggleDeletePanel = () => setDeletePanel(!showDeletePanel);
   const toggleEditPanel = () => {
     if (showEditPanel) {
-      let closeBtn = document.getElementById(`offcanvas-close-${roleId}`);
+      let closeBtn = document.getElementById(`offcanvas-close-edit-${roleId}`);
       if (closeBtn) closeBtn.click();
     }
 
     setEditPanel(!showEditPanel);
-  };
-
-  const onDeleteRole = () => {
-    toggleLoading();
-
-    deleteHandler(roleId)
-      .then(() => toggleLoading())
-      .catch(() => toggleLoading());
   };
 
   return (
@@ -54,8 +46,8 @@ export const ActionCell = ({
         type="edit"
         disabled={disabled}
         data-bs-toggle="offcanvas"
-        data-bs-target={`#offcanvas-${roleId}`}
-        aria-controls={`offcanvas-${roleId}`}
+        data-bs-target={`#offcanvas-edit-${roleId}`}
+        aria-controls={`offcanvas-edit-${roleId}`}
       />
       <Drawer
         id={roleId}
@@ -73,14 +65,13 @@ export const ActionCell = ({
         }
       />
       <Button onClick={toggleDeletePanel} type="delete" disabled={disabled} />
-      <ModalDialog
-        title="Delete Role"
+      <DeleteRoleModal
+        id={roleId}
+        rowId={rowId}
+        deleteHandler={deleteHandler}
+        deleteRow={deleteRow}
         show={showDeletePanel}
-        toggleShow={toggleDeletePanel}
-        ctaTitle="Remove"
-        ctaBtnType="delete"
-        action={() => onDeleteRole()}
-        content={<p>Are you sure you want to remove this role?</p>}
+        toggleModal={toggleDeletePanel}
       />
     </div>
   );
