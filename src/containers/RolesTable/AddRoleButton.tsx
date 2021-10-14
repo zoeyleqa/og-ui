@@ -52,14 +52,15 @@ export const AddRoleButton = ({ addHandler, addRow }: AddRoleProps) => {
     <>
       <Button
         onClick={toggleEditPanel}
-        type="edit"
+        type="add"
+        label="Add Role"
         data-bs-toggle="offcanvas"
         data-bs-target={`#offcanvas-${drawerId}`}
         aria-controls={`offcanvas-${drawerId}`}
       />
       <Drawer
         id={drawerId}
-        title="Edit Role"
+        title="Add New Role"
         show={showAddPanel}
         content={
           <Form id={formId}>
@@ -94,7 +95,12 @@ export const AddRoleButton = ({ addHandler, addRow }: AddRoleProps) => {
                 <Form.Control required placeholder="Enter Pay" />
               </Col>
             </Form.Group>
-            <Button type="save" onClick={() => addRole()} loading={loading} />
+            <Button
+              type="save"
+              label="Submit"
+              onClick={() => addRole()}
+              loading={loading}
+            />
           </Form>
         }
       />

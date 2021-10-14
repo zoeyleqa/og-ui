@@ -27,8 +27,8 @@ export const roleTableHeader = [
 ];
 
 const actionButtons = (
-  updateRow: (rowIndex: any, rowValue: any) => void,
-  deleteRow: (rowIndex: any) => void
+  updateRow: (rowIndex: number, rowValue: any) => void,
+  deleteRow: (rowIndex: number) => void
 ) => ({
   id: "Actions",
   Header: "Actions",
@@ -54,7 +54,7 @@ const RolesDataTable = () => {
   useEffect(() => {
     if (!loading) {
       setRoleData(roleOriginalData);
-      roleTableHeader.push(actionButtons(updateData, deleteRole));
+      roleTableHeader.push(actionButtons(updateRole, deleteRole));
     }
   }, [loading]);
 
@@ -68,14 +68,14 @@ const RolesDataTable = () => {
 
   // When our cell renderer calls updateMyData, we'll use
   // the rowIndex and new value to update the original data
-  const updateData = (rowIndex: any, rowValue: any) => {
+  const updateRole = (rowIndex: number, rowValue: any) => {
     // We also turn on the flag to not reset the page
     skipResetRef.current = true;
     setRoleData((old: any[] | null) =>
       !old
         ? old
         : old.map((row, index) => {
-            if (index === parseInt(rowIndex)) {
+            if (index === rowIndex) {
               return {
                 ...rowValue
               };
@@ -85,7 +85,7 @@ const RolesDataTable = () => {
     );
   };
 
-  const deleteRole = (rowIndex: any) => {
+  const deleteRole = (rowIndex: number) => {
     skipResetRef.current = true;
     setRoleData((old: any[] | null) =>
       !old
@@ -108,7 +108,7 @@ const RolesDataTable = () => {
         <BaseTable
           data={roleData}
           header={roleTableHeader}
-          updateMyData={updateData}
+          updateMyData={updateRole}
           skipReset={skipResetRef}
         />
       </>

@@ -5,7 +5,7 @@ import { DeleteRoleModal } from "./DeleteRoleModal";
 import { EditRoleForm } from "./EditRoleForm";
 
 interface ActionCellProps {
-  rowId: string | number;
+  rowId: string;
   row: any;
   editHandler: any;
   updateRow: any;

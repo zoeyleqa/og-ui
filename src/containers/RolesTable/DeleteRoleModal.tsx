@@ -1,4 +1,14 @@
+import React from "react";
 import { ModalDialog } from "../../components/ModalDialog";
+
+interface DeleteModalProps {
+  id: string | number;
+  rowId: string;
+  deleteHandler: any;
+  deleteRow: any;
+  show: boolean;
+  toggleModal: () => void;
+}
 
 export const DeleteRoleModal = ({
   id,
@@ -7,8 +17,8 @@ export const DeleteRoleModal = ({
   deleteRow,
   show,
   toggleModal
-}) => {
-  const { mutate: del, loading } = deleteHandler({ item_id: id });
+}: DeleteModalProps) => {
+  const { mutate: del, loading } = deleteHandler();
 
   return (
     <ModalDialog
@@ -17,11 +27,12 @@ export const DeleteRoleModal = ({
       toggleShow={toggleModal}
       ctaTitle="Remove"
       ctaBtnType="delete"
-      loading={loading}
+      ctaBtnLoading={loading}
       action={() =>
-        del()
+        del(id)
           .then(() => {
-            deleteRow(rowId);
+            debugger;
+            deleteRow(parseInt(rowId));
             toggleModal();
           })
           .catch((e: any) => {

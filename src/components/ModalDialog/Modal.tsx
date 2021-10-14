@@ -9,6 +9,7 @@ export interface ModalDialog {
   action: () => void;
   ctaTitle: string;
   ctaBtnType: string;
+  ctaBtnLoading: boolean;
   content: any;
 }
 
@@ -19,8 +20,8 @@ export const ModalDialog = ({
   action,
   ctaTitle,
   ctaBtnType,
-  content,
-  ...rest
+  ctaBtnLoading,
+  content
 }: ModalDialog) => {
   return (
     <Modal
@@ -40,7 +41,7 @@ export const ModalDialog = ({
           type={ctaBtnType}
           label={ctaTitle}
           onClick={action}
-          {...rest}
+          loading={ctaBtnLoading}
         />
       </Modal.Footer>
     </Modal>

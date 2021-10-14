@@ -44,7 +44,10 @@
     "sb:build": "build-storybook",
     "rollup:build": "rollup -c",
     "rollup:watch": "rollup -c --watch",
-    "watch": "npm-run-all --parallel rollup:watch sb:start"
+    "watch": "npm-run-all --parallel rollup:watch sb:start",
+    "generate-actions": "restful-react import --file src/action/openapi.json --output src/action/actions.tsx --validation",
+    "postgenerate-actions": "prettier src/action/actions.tsx --write",
+    "generate-api": "npm-run-all --serial generate-actions postgenerate-actions"
   },
   "files": [
     "/lib",

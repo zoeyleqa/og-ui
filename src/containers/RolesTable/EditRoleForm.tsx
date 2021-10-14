@@ -6,7 +6,7 @@ const formId = "edit-role-form";
 
 interface EditFormProps {
   id: string | number;
-  rowId: string | number;
+  rowId: string;
   roleData: any;
   editHandler: any;
   updateRow: any;
@@ -37,7 +37,7 @@ export const EditRoleForm = ({
 
     update({ ...args })
       .then((retData: { id: any }) => {
-        updateRow(rowId, retData);
+        updateRow(parseInt(rowId), retData);
         toggleDrawer();
       })
       .catch((e: any) => {
