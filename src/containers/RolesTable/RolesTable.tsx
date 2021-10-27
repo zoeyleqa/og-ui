@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { ActionCell } from "./ActionButtonsCell";
 import { AddRoleButton } from "./AddRoleButton";
 import { BaseTable } from "../BaseTable";
+import { Preloader } from "../../components/Preloader";
 import { RestfulProvider } from "restful-react";
 import {
   useRouteRolesGet,
@@ -101,21 +102,19 @@ const RolesDataTable = () => {
     setRoleData((old: any[] | null) => (!old ? [row] : [...old, row]));
   };
 
-  if (!loading && roleData) {
-    return (
-      <>
-        <AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />
-        <BaseTable
-          data={roleData}
-          header={roleTableHeader}
-          updateMyData={updateRole}
-          skipReset={skipResetRef}
-        />
-      </>
-    );
-  }
-
-  return <h1>Loading...</h1>;
+  return !loading && roleData ? (
+    <>
+      <AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />
+      <BaseTable
+        data={roleData}
+        header={roleTableHeader}
+        updateMyData={updateRole}
+        skipReset={skipResetRef}
+      />
+    </>
+  ) : (
+    <Preloader />
+  );
 };
 
 const RolesTable = ({ baseUrl }: { baseUrl: string }) => {

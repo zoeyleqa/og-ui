@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
+import { IconAwesome } from "../../components/Icons/IconAwesome";
+import "./style.css";
 
 interface BaseTableProps {
   data: object[];
@@ -56,7 +58,21 @@ const BaseTable = ({
                 <span {...column.getSortByToggleProps()}>
                   {column.render("Header")}
                   {/* Add a sort direction indicator */}
-                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                  {column.isSorted ? (
+                    column.isSortedDesc ? (
+                      <IconAwesome
+                        icon="caret-up"
+                        style={{ marginLeft: "5px" }}
+                      />
+                    ) : (
+                      <IconAwesome
+                        icon="caret-down"
+                        style={{ marginLeft: "5px" }}
+                      />
+                    )
+                  ) : (
+                    ""
+                  )}
                 </span>
               </th>
             ))}

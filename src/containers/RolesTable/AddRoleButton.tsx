@@ -53,7 +53,7 @@ export const AddRoleButton = ({ addHandler, addRow }: AddRoleProps) => {
       <Button
         onClick={toggleEditPanel}
         type="add"
-        label="Add Role"
+        label="New Role"
         data-bs-toggle="offcanvas"
         data-bs-target={`#offcanvas-${drawerId}`}
         aria-controls={`offcanvas-${drawerId}`}

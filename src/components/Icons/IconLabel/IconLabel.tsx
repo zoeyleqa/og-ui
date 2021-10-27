@@ -4,10 +4,10 @@ import { IconAwesome } from "../IconAwesome";
 interface LabelProps {
   awesomeIcon: string;
   label: string;
-  iconFirst?: string;
+  iconFirst?: boolean;
 }
 
-const IconLabel = ({ awesomeIcon, label, iconFirst }: LabelProps) => {
+const IconLabel = ({ awesomeIcon, label, iconFirst = true }: LabelProps) => {
   const iconPadding = iconFirst ? { paddingRight: 10 } : { paddingLeft: 10 };
   const renderIcon = () => {
     return <IconAwesome icon={awesomeIcon} style={iconPadding} />;

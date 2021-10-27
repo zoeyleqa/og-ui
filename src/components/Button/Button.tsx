@@ -1,8 +1,8 @@
+import React from "react";
 import { Button as BSButton } from "react-bootstrap";
 import { IconLabel } from "../Icons/IconLabel";
 import btnVariant from "./variant";
 import "./button.css";
-import React from "react";
 
 export interface ButtonProps {
   size?: "sm" | "lg";
@@ -19,9 +19,6 @@ export interface ButtonProps {
   loading?: boolean;
 }
 
-/**
- * Primary UI component for user interaction
- */
 export const Button = ({
   size = "sm",
   type = "loader",

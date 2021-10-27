@@ -1,0 +1,50 @@
+#loader-box {
+  position: fixed;
+  left: 45%;
+  top: 45%;
+  z-index: 1000;
+  color: #5c6670;
+}
+
+#inline-loader {
+  display: block;
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid#48bb78;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+#loader-label {
+  padding-top: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animation for loading dots */
+@keyframes dots {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+}
+
+.dots::after {
+  content: "";
+  -webkit-animation: dots 1s linear infinite;
+  animation: dots 1s linear infinite;
+}
+/*** End dots animation ***/
