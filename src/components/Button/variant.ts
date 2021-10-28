@@ -12,13 +12,13 @@ type variant = {
 var obj: variant = {
   add: {
     label: "Add",
-    variant: "warning",
+    variant: "outline-green",
     awesomeIcon: "plus",
     loadingText: "Adding..."
   },
   delete: {
     label: "Delete",
-    variant: "danger",
+    variant: "outline-danger",
     awesomeIcon: "trash",
     loadingText: "Deleting..."
   },
@@ -30,7 +30,7 @@ var obj: variant = {
   },
   edit: {
     label: "Edit",
-    variant: "primary",
+    variant: "outline-neutral",
     awesomeIcon: "pencil-alt",
     loadingText: "Editing..."
   },

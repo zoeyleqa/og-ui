@@ -3,6 +3,7 @@ import { ActionCell } from "./ActionButtonsCell";
 import { AddRoleButton } from "./AddRoleButton";
 import { BaseTable } from "../BaseTable";
 import { Preloader } from "../../components/Preloader";
+import { Form, Row, Col } from "react-bootstrap";
 import { RestfulProvider } from "restful-react";
 import {
   useRouteRolesGet,
@@ -34,6 +35,7 @@ const actionButtons = (
   id: "Actions",
   Header: "Actions",
   accessor: "action-buttons",
+  disableSortBy: true,
   Cell: ({ row }: { row: any }) => (
     <ActionCell
       rowId={row.id}
@@ -104,7 +106,11 @@ const RolesDataTable = () => {
 
   return !loading && roleData ? (
     <>
-      <AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />
+      <Row className="mb-3">
+        <Col className="text-right">
+          <AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />
+        </Col>
+      </Row>
       <BaseTable
         data={roleData}
         header={roleTableHeader}

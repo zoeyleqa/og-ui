@@ -1,0 +1,19 @@
+:root {
+  --primary-red: #dc3545;
+  --primary-green: #5c873c;
+  --primary-blue: #3182ce;
+  --primary-white: #ffffff;
+  --accessible-green: #48bb78;
+  --secondary-green-1: #6b924e;
+  --secondary-green-2: #85a56d;
+  --secondary-green-3:#477A7B;
+  --neutral-1: #282828;
+  --neutral-2: #4a5568;
+  --neutral-3: #718096;
+  --neutral-4: #e2e8f0;
+  --neutral-5: #f7fafc;
+}
+
+.text-right {
+  text-align: right;
+}

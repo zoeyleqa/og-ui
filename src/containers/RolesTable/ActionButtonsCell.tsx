@@ -40,7 +40,7 @@ export const ActionCell = ({
   };
 
   return (
-    <div style={{ textAlign: "left" }}>
+    <>
       <Button
         onClick={toggleEditPanel}
         type="edit"
@@ -73,6 +73,6 @@ export const ActionCell = ({
         show={showDeletePanel}
         toggleModal={toggleDeletePanel}
       />
-    </div>
+    </>
   );
 };
