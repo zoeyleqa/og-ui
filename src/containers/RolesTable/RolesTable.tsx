@@ -3,7 +3,8 @@ import { ActionCell } from "./ActionButtonsCell";
 import { AddRoleButton } from "./AddRoleButton";
 import { BaseTable } from "../BaseTable";
 import { Preloader } from "../../components/Preloader";
-import { Form, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { TableFilter } from "../../components/TableFilter/TableFilter";
 import { RestfulProvider } from "restful-react";
 import {
   useRouteRolesGet,
@@ -105,19 +106,13 @@ const RolesDataTable = () => {
   };
 
   return !loading && roleData ? (
-    <>
-      <Row className="mb-3">
-        <Col className="text-right">
-          <AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />
-        </Col>
-      </Row>
-      <BaseTable
-        data={roleData}
-        header={roleTableHeader}
-        updateMyData={updateRole}
-        skipReset={skipResetRef}
-      />
-    </>
+    <BaseTable
+      data={roleData}
+      header={roleTableHeader}
+      updateMyData={updateRole}
+      skipReset={skipResetRef}
+      toolComponent={<AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />}
+    />
   ) : (
     <Preloader />
   );

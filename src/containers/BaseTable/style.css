@@ -1,3 +1,5 @@
+@import "../../main.css";
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -14,13 +16,11 @@ td {
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: var(--neutral-5);
 }
 
 thead {
-  background-color: #e2e8f0;
-  color: #4a5568;
+  background-color: var(--neutral-4);
+  color: var(--neutral-2);
   padding: 0.75rem 1rem;
 }
-
-

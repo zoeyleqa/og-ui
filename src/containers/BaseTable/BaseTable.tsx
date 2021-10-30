@@ -1,5 +1,7 @@
-import React, { useMemo } from "react";
-import { useTable, useSortBy } from "react-table";
+import React, { ReactComponentElement, useMemo } from "react";
+import {  useGlobalFilter, useTable, useSortBy } from "react-table";
+import { Row, Col } from "react-bootstrap";
+import { TableFilter } from "../../components/TableFilter/TableFilter";
 import { IconAwesome } from "../../components/Icons/IconAwesome";
 import "./style.css";
 
@@ -8,13 +10,15 @@ interface BaseTableProps {
   header: any[];
   updateMyData: (rowIndex: any, rowValue: any) => void;
   skipReset: any;
+  toolComponent: ReactComponentElement<any>;
 }
 
 const BaseTable = ({
   data,
   header,
   updateMyData,
-  skipReset
+  skipReset,
+  toolComponent
 }: BaseTableProps) => {
   const columns = useMemo(() => header, []);
   const {
@@ -22,7 +26,10 @@ const BaseTable = ({
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow
+    prepareRow,
+    state,
+    preGlobalFilteredRows,
+    setGlobalFilter
   } = useTable(
     {
       columns,
@@ -38,53 +45,70 @@ const BaseTable = ({
       autoResetPage: !skipReset,
       autoResetSelectedRows: !skipReset
     },
+    useGlobalFilter,
     useSortBy
   );
 
   return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>
-                <span {...column.getSortByToggleProps()}>
-                  {column.render("Header")}
-                  {/* Add a sort direction indicator */}
-                  {column.isSorted ? (
-                    column.isSortedDesc ? (
-                      <IconAwesome
-                        icon="caret-up"
-                        style={{ marginLeft: "5px" }}
-                      />
+    <>
+      <Row className="mb-3">
+        <Col xs={6}>
+          <TableFilter
+            preGlobalFilteredRows={preGlobalFilteredRows}
+            globalFilter={state.globalFilter}
+            setGlobalFilter={setGlobalFilter}
+          />
+        </Col>
+        <Col xs={6} className="text-right">
+          {toolComponent}
+        </Col>
+      </Row>
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>
+                  <span {...column.getSortByToggleProps()}>
+                    {column.render("Header")}
+                    {/* Add a sort direction indicator */}
+                    {column.isSorted ? (
+                      column.isSortedDesc ? (
+                        <IconAwesome
+                          icon="caret-up"
+                          style={{ marginLeft: "5px" }}
+                        />
+                      ) : (
+                        <IconAwesome
+                          icon="caret-down"
+                          style={{ marginLeft: "5px" }}
+                        />
+                      )
                     ) : (
-                      <IconAwesome
-                        icon="caret-down"
-                        style={{ marginLeft: "5px" }}
-                      />
-                    )
-                  ) : (
-                    ""
-                  )}
-                </span>
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-              })}
+                      ""
+                    )}
+                  </span>
+                </th>
+              ))}
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map(row => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 };
 
