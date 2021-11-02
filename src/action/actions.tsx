@@ -61,6 +61,90 @@ export interface BodyLoginLoginPost {
   client_secret?: string;
 }
 
+export interface EventCreate {
+  name: string;
+  open_at: string;
+  start_at: string;
+  end_at: string;
+  infil_suspend_at: string;
+  exfil_suspend_at: string;
+  po_suspend_at: string;
+  final_suspend_at: string;
+  allow_override_dates: boolean;
+}
+
+export interface EventRead {
+  name: string;
+  open_at: string;
+  start_at: string;
+  end_at: string;
+  infil_suspend_at: string;
+  exfil_suspend_at: string;
+  po_suspend_at: string;
+  final_suspend_at: string;
+  allow_override_dates: boolean;
+  id: number;
+}
+
+export interface EventReadUpdate {
+  name: string;
+  open_at: string;
+  start_at: string;
+  end_at: string;
+  infil_suspend_at: string;
+  exfil_suspend_at: string;
+  po_suspend_at: string;
+  final_suspend_at: string;
+  allow_override_dates: boolean;
+}
+
+export interface ExerciseCreate {
+  name: string;
+  description: string;
+  background_color: string;
+  text_color: string;
+  GroupId: number;
+}
+
+export interface ExerciseRead {
+  name: string;
+  description: string;
+  background_color: string;
+  text_color: string;
+  GroupId: number;
+  id: number;
+}
+
+export interface ExerciseReadUpdate {
+  name: string;
+  description: string;
+  background_color: string;
+  text_color: string;
+  GroupId: number;
+}
+
+export interface GroupCreate {
+  name: string;
+  unit: string;
+  lead_one: string;
+  lead_two: string;
+}
+
+export interface GroupRead {
+  name: string;
+  unit: string;
+  lead_one: string;
+  lead_two: string;
+  id: number;
+}
+
+export interface GroupReadUpdate {
+  name: string;
+  unit: string;
+  lead_one: string;
+  lead_two: string;
+}
+
 export interface HTTPValidationError {
   detail?: ValidationError[];
 }
@@ -97,6 +181,22 @@ export interface LanguageReadUpdate {
   comment: string;
 }
 
+export interface PermissionTagCreate {
+  name: string;
+  description: string;
+}
+
+export interface PermissionTagRead {
+  name: string;
+  description: string;
+  id: number;
+}
+
+export interface PermissionTagReadUpdate {
+  name: string;
+  description: string;
+}
+
 export interface RoleCreate {
   name: string;
   description: string;
@@ -114,6 +214,49 @@ export interface RoleReadUpdate {
   name: string;
   description: string;
   pay: number;
+}
+
+export interface SiteCreate {
+  name: string;
+  description: string;
+  country: string;
+  city: string;
+  state: string;
+  latitude: number;
+  latitude_min: number;
+  latitude_sec: number;
+  longitude: number;
+  longitude_min: number;
+  longitude_sec: number;
+}
+
+export interface SiteRead {
+  name: string;
+  description: string;
+  country: string;
+  city: string;
+  state: string;
+  latitude: number;
+  latitude_min: number;
+  latitude_sec: number;
+  longitude: number;
+  longitude_min: number;
+  longitude_sec: number;
+  id: number;
+}
+
+export interface SiteReadUpdate {
+  name: string;
+  description: string;
+  country: string;
+  city: string;
+  state: string;
+  latitude: number;
+  latitude_min: number;
+  latitude_sec: number;
+  longitude: number;
+  longitude_min: number;
+  longitude_sec: number;
 }
 
 export interface Token {
@@ -757,6 +900,1027 @@ export const useRouteRolesItemIdDelete = (
     { ...props }
   );
 
+export interface RouteSitesGetQueryParams {
+  skip?: number;
+  limit?: number;
+}
+
+export type RouteSitesGetProps = Omit<
+  GetProps<SiteRead[], HTTPValidationError, RouteSitesGetQueryParams, void>,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const RouteSitesGet = (props: RouteSitesGetProps) => (
+  <Get<SiteRead[], HTTPValidationError, RouteSitesGetQueryParams, void>
+    path={`/sites`}
+    {...props}
+  />
+);
+
+export type UseRouteSitesGetProps = Omit<
+  UseGetProps<SiteRead[], HTTPValidationError, RouteSitesGetQueryParams, void>,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const useRouteSitesGet = (props: UseRouteSitesGetProps) =>
+  useGet<SiteRead[], HTTPValidationError, RouteSitesGetQueryParams, void>(
+    `/sites`,
+    props
+  );
+
+export type RouteSitesPostProps = Omit<
+  MutateProps<SiteRead, HTTPValidationError, void, SiteCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const RouteSitesPost = (props: RouteSitesPostProps) => (
+  <Mutate<SiteRead, HTTPValidationError, void, SiteCreate, void>
+    verb="POST"
+    path={`/sites`}
+    {...props}
+  />
+);
+
+export type UseRouteSitesPostProps = Omit<
+  UseMutateProps<SiteRead, HTTPValidationError, void, SiteCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const useRouteSitesPost = (props: UseRouteSitesPostProps) =>
+  useMutate<SiteRead, HTTPValidationError, void, SiteCreate, void>(
+    "POST",
+    `/sites`,
+    props
+  );
+
+export type RouteSitesDeleteProps = Omit<
+  MutateProps<SiteRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const RouteSitesDelete = (props: RouteSitesDeleteProps) => (
+  <Mutate<SiteRead[], unknown, void, void, void>
+    verb="DELETE"
+    path={`/sites`}
+    {...props}
+  />
+);
+
+export type UseRouteSitesDeleteProps = Omit<
+  UseMutateProps<SiteRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const useRouteSitesDelete = (props: UseRouteSitesDeleteProps) =>
+  useMutate<SiteRead[], unknown, void, void, void>("DELETE", `/sites`, {
+    ...props,
+  });
+
+export interface RouteSitesItemIdGetPathParams {
+  item_id: number;
+}
+
+export type RouteSitesItemIdGetProps = Omit<
+  GetProps<SiteRead, HTTPValidationError, void, RouteSitesItemIdGetPathParams>,
+  "path"
+> &
+  RouteSitesItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const RouteSitesItemIdGet = ({
+  item_id,
+  ...props
+}: RouteSitesItemIdGetProps) => (
+  <Get<SiteRead, HTTPValidationError, void, RouteSitesItemIdGetPathParams>
+    path={`/sites/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteSitesItemIdGetProps = Omit<
+  UseGetProps<
+    SiteRead,
+    HTTPValidationError,
+    void,
+    RouteSitesItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteSitesItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const useRouteSitesItemIdGet = ({
+  item_id,
+  ...props
+}: UseRouteSitesItemIdGetProps) =>
+  useGet<SiteRead, HTTPValidationError, void, RouteSitesItemIdGetPathParams>(
+    (paramsInPath: RouteSitesItemIdGetPathParams) =>
+      `/sites/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export interface RouteSitesItemIdPutPathParams {
+  item_id: number;
+}
+
+export type RouteSitesItemIdPutProps = Omit<
+  MutateProps<
+    SiteRead,
+    HTTPValidationError,
+    void,
+    SiteReadUpdate,
+    RouteSitesItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteSitesItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const RouteSitesItemIdPut = ({
+  item_id,
+  ...props
+}: RouteSitesItemIdPutProps) => (
+  <Mutate<
+    SiteRead,
+    HTTPValidationError,
+    void,
+    SiteReadUpdate,
+    RouteSitesItemIdPutPathParams
+  >
+    verb="PUT"
+    path={`/sites/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteSitesItemIdPutProps = Omit<
+  UseMutateProps<
+    SiteRead,
+    HTTPValidationError,
+    void,
+    SiteReadUpdate,
+    RouteSitesItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteSitesItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const useRouteSitesItemIdPut = ({
+  item_id,
+  ...props
+}: UseRouteSitesItemIdPutProps) =>
+  useMutate<
+    SiteRead,
+    HTTPValidationError,
+    void,
+    SiteReadUpdate,
+    RouteSitesItemIdPutPathParams
+  >(
+    "PUT",
+    (paramsInPath: RouteSitesItemIdPutPathParams) =>
+      `/sites/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export type RouteSitesItemIdDeleteProps = Omit<
+  MutateProps<SiteRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const RouteSitesItemIdDelete = (props: RouteSitesItemIdDeleteProps) => (
+  <Mutate<SiteRead, HTTPValidationError, void, number, void>
+    verb="DELETE"
+    path={`/sites`}
+    {...props}
+  />
+);
+
+export type UseRouteSitesItemIdDeleteProps = Omit<
+  UseMutateProps<SiteRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const useRouteSitesItemIdDelete = (
+  props: UseRouteSitesItemIdDeleteProps
+) =>
+  useMutate<SiteRead, HTTPValidationError, void, number, void>(
+    "DELETE",
+    `/sites`,
+    { ...props }
+  );
+
+export interface RouteEventsGetQueryParams {
+  skip?: number;
+  limit?: number;
+}
+
+export type RouteEventsGetProps = Omit<
+  GetProps<EventRead[], HTTPValidationError, RouteEventsGetQueryParams, void>,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const RouteEventsGet = (props: RouteEventsGetProps) => (
+  <Get<EventRead[], HTTPValidationError, RouteEventsGetQueryParams, void>
+    path={`/events`}
+    {...props}
+  />
+);
+
+export type UseRouteEventsGetProps = Omit<
+  UseGetProps<
+    EventRead[],
+    HTTPValidationError,
+    RouteEventsGetQueryParams,
+    void
+  >,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const useRouteEventsGet = (props: UseRouteEventsGetProps) =>
+  useGet<EventRead[], HTTPValidationError, RouteEventsGetQueryParams, void>(
+    `/events`,
+    props
+  );
+
+export type RouteEventsPostProps = Omit<
+  MutateProps<EventRead, HTTPValidationError, void, EventCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const RouteEventsPost = (props: RouteEventsPostProps) => (
+  <Mutate<EventRead, HTTPValidationError, void, EventCreate, void>
+    verb="POST"
+    path={`/events`}
+    {...props}
+  />
+);
+
+export type UseRouteEventsPostProps = Omit<
+  UseMutateProps<EventRead, HTTPValidationError, void, EventCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const useRouteEventsPost = (props: UseRouteEventsPostProps) =>
+  useMutate<EventRead, HTTPValidationError, void, EventCreate, void>(
+    "POST",
+    `/events`,
+    props
+  );
+
+export type RouteEventsDeleteProps = Omit<
+  MutateProps<EventRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const RouteEventsDelete = (props: RouteEventsDeleteProps) => (
+  <Mutate<EventRead[], unknown, void, void, void>
+    verb="DELETE"
+    path={`/events`}
+    {...props}
+  />
+);
+
+export type UseRouteEventsDeleteProps = Omit<
+  UseMutateProps<EventRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const useRouteEventsDelete = (props: UseRouteEventsDeleteProps) =>
+  useMutate<EventRead[], unknown, void, void, void>("DELETE", `/events`, {
+    ...props,
+  });
+
+export interface RouteEventsItemIdGetPathParams {
+  item_id: number;
+}
+
+export type RouteEventsItemIdGetProps = Omit<
+  GetProps<
+    EventRead,
+    HTTPValidationError,
+    void,
+    RouteEventsItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteEventsItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const RouteEventsItemIdGet = ({
+  item_id,
+  ...props
+}: RouteEventsItemIdGetProps) => (
+  <Get<EventRead, HTTPValidationError, void, RouteEventsItemIdGetPathParams>
+    path={`/events/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteEventsItemIdGetProps = Omit<
+  UseGetProps<
+    EventRead,
+    HTTPValidationError,
+    void,
+    RouteEventsItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteEventsItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const useRouteEventsItemIdGet = ({
+  item_id,
+  ...props
+}: UseRouteEventsItemIdGetProps) =>
+  useGet<EventRead, HTTPValidationError, void, RouteEventsItemIdGetPathParams>(
+    (paramsInPath: RouteEventsItemIdGetPathParams) =>
+      `/events/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export interface RouteEventsItemIdPutPathParams {
+  item_id: number;
+}
+
+export type RouteEventsItemIdPutProps = Omit<
+  MutateProps<
+    EventRead,
+    HTTPValidationError,
+    void,
+    EventReadUpdate,
+    RouteEventsItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteEventsItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const RouteEventsItemIdPut = ({
+  item_id,
+  ...props
+}: RouteEventsItemIdPutProps) => (
+  <Mutate<
+    EventRead,
+    HTTPValidationError,
+    void,
+    EventReadUpdate,
+    RouteEventsItemIdPutPathParams
+  >
+    verb="PUT"
+    path={`/events/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteEventsItemIdPutProps = Omit<
+  UseMutateProps<
+    EventRead,
+    HTTPValidationError,
+    void,
+    EventReadUpdate,
+    RouteEventsItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteEventsItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const useRouteEventsItemIdPut = ({
+  item_id,
+  ...props
+}: UseRouteEventsItemIdPutProps) =>
+  useMutate<
+    EventRead,
+    HTTPValidationError,
+    void,
+    EventReadUpdate,
+    RouteEventsItemIdPutPathParams
+  >(
+    "PUT",
+    (paramsInPath: RouteEventsItemIdPutPathParams) =>
+      `/events/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export type RouteEventsItemIdDeleteProps = Omit<
+  MutateProps<EventRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const RouteEventsItemIdDelete = (
+  props: RouteEventsItemIdDeleteProps
+) => (
+  <Mutate<EventRead, HTTPValidationError, void, number, void>
+    verb="DELETE"
+    path={`/events`}
+    {...props}
+  />
+);
+
+export type UseRouteEventsItemIdDeleteProps = Omit<
+  UseMutateProps<EventRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const useRouteEventsItemIdDelete = (
+  props: UseRouteEventsItemIdDeleteProps
+) =>
+  useMutate<EventRead, HTTPValidationError, void, number, void>(
+    "DELETE",
+    `/events`,
+    { ...props }
+  );
+
+export interface RouteExercisesGetQueryParams {
+  skip?: number;
+  limit?: number;
+}
+
+export type RouteExercisesGetProps = Omit<
+  GetProps<
+    ExerciseRead[],
+    HTTPValidationError,
+    RouteExercisesGetQueryParams,
+    void
+  >,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const RouteExercisesGet = (props: RouteExercisesGetProps) => (
+  <Get<ExerciseRead[], HTTPValidationError, RouteExercisesGetQueryParams, void>
+    path={`/exercises`}
+    {...props}
+  />
+);
+
+export type UseRouteExercisesGetProps = Omit<
+  UseGetProps<
+    ExerciseRead[],
+    HTTPValidationError,
+    RouteExercisesGetQueryParams,
+    void
+  >,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const useRouteExercisesGet = (props: UseRouteExercisesGetProps) =>
+  useGet<
+    ExerciseRead[],
+    HTTPValidationError,
+    RouteExercisesGetQueryParams,
+    void
+  >(`/exercises`, props);
+
+export type RouteExercisesPostProps = Omit<
+  MutateProps<ExerciseRead, HTTPValidationError, void, ExerciseCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const RouteExercisesPost = (props: RouteExercisesPostProps) => (
+  <Mutate<ExerciseRead, HTTPValidationError, void, ExerciseCreate, void>
+    verb="POST"
+    path={`/exercises`}
+    {...props}
+  />
+);
+
+export type UseRouteExercisesPostProps = Omit<
+  UseMutateProps<ExerciseRead, HTTPValidationError, void, ExerciseCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const useRouteExercisesPost = (props: UseRouteExercisesPostProps) =>
+  useMutate<ExerciseRead, HTTPValidationError, void, ExerciseCreate, void>(
+    "POST",
+    `/exercises`,
+    props
+  );
+
+export type RouteExercisesDeleteProps = Omit<
+  MutateProps<ExerciseRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const RouteExercisesDelete = (props: RouteExercisesDeleteProps) => (
+  <Mutate<ExerciseRead[], unknown, void, void, void>
+    verb="DELETE"
+    path={`/exercises`}
+    {...props}
+  />
+);
+
+export type UseRouteExercisesDeleteProps = Omit<
+  UseMutateProps<ExerciseRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const useRouteExercisesDelete = (props: UseRouteExercisesDeleteProps) =>
+  useMutate<ExerciseRead[], unknown, void, void, void>("DELETE", `/exercises`, {
+    ...props,
+  });
+
+export interface RouteExercisesItemIdGetPathParams {
+  item_id: number;
+}
+
+export type RouteExercisesItemIdGetProps = Omit<
+  GetProps<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    RouteExercisesItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteExercisesItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const RouteExercisesItemIdGet = ({
+  item_id,
+  ...props
+}: RouteExercisesItemIdGetProps) => (
+  <Get<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    RouteExercisesItemIdGetPathParams
+  >
+    path={`/exercises/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteExercisesItemIdGetProps = Omit<
+  UseGetProps<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    RouteExercisesItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteExercisesItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const useRouteExercisesItemIdGet = ({
+  item_id,
+  ...props
+}: UseRouteExercisesItemIdGetProps) =>
+  useGet<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    RouteExercisesItemIdGetPathParams
+  >(
+    (paramsInPath: RouteExercisesItemIdGetPathParams) =>
+      `/exercises/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export interface RouteExercisesItemIdPutPathParams {
+  item_id: number;
+}
+
+export type RouteExercisesItemIdPutProps = Omit<
+  MutateProps<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    ExerciseReadUpdate,
+    RouteExercisesItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteExercisesItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const RouteExercisesItemIdPut = ({
+  item_id,
+  ...props
+}: RouteExercisesItemIdPutProps) => (
+  <Mutate<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    ExerciseReadUpdate,
+    RouteExercisesItemIdPutPathParams
+  >
+    verb="PUT"
+    path={`/exercises/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteExercisesItemIdPutProps = Omit<
+  UseMutateProps<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    ExerciseReadUpdate,
+    RouteExercisesItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteExercisesItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const useRouteExercisesItemIdPut = ({
+  item_id,
+  ...props
+}: UseRouteExercisesItemIdPutProps) =>
+  useMutate<
+    ExerciseRead,
+    HTTPValidationError,
+    void,
+    ExerciseReadUpdate,
+    RouteExercisesItemIdPutPathParams
+  >(
+    "PUT",
+    (paramsInPath: RouteExercisesItemIdPutPathParams) =>
+      `/exercises/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export type RouteExercisesItemIdDeleteProps = Omit<
+  MutateProps<ExerciseRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const RouteExercisesItemIdDelete = (
+  props: RouteExercisesItemIdDeleteProps
+) => (
+  <Mutate<ExerciseRead, HTTPValidationError, void, number, void>
+    verb="DELETE"
+    path={`/exercises`}
+    {...props}
+  />
+);
+
+export type UseRouteExercisesItemIdDeleteProps = Omit<
+  UseMutateProps<ExerciseRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const useRouteExercisesItemIdDelete = (
+  props: UseRouteExercisesItemIdDeleteProps
+) =>
+  useMutate<ExerciseRead, HTTPValidationError, void, number, void>(
+    "DELETE",
+    `/exercises`,
+    { ...props }
+  );
+
+export interface RouteGroupsGetQueryParams {
+  skip?: number;
+  limit?: number;
+}
+
+export type RouteGroupsGetProps = Omit<
+  GetProps<GroupRead[], HTTPValidationError, RouteGroupsGetQueryParams, void>,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const RouteGroupsGet = (props: RouteGroupsGetProps) => (
+  <Get<GroupRead[], HTTPValidationError, RouteGroupsGetQueryParams, void>
+    path={`/groups`}
+    {...props}
+  />
+);
+
+export type UseRouteGroupsGetProps = Omit<
+  UseGetProps<
+    GroupRead[],
+    HTTPValidationError,
+    RouteGroupsGetQueryParams,
+    void
+  >,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const useRouteGroupsGet = (props: UseRouteGroupsGetProps) =>
+  useGet<GroupRead[], HTTPValidationError, RouteGroupsGetQueryParams, void>(
+    `/groups`,
+    props
+  );
+
+export type RouteGroupsPostProps = Omit<
+  MutateProps<GroupRead, HTTPValidationError, void, GroupCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const RouteGroupsPost = (props: RouteGroupsPostProps) => (
+  <Mutate<GroupRead, HTTPValidationError, void, GroupCreate, void>
+    verb="POST"
+    path={`/groups`}
+    {...props}
+  />
+);
+
+export type UseRouteGroupsPostProps = Omit<
+  UseMutateProps<GroupRead, HTTPValidationError, void, GroupCreate, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const useRouteGroupsPost = (props: UseRouteGroupsPostProps) =>
+  useMutate<GroupRead, HTTPValidationError, void, GroupCreate, void>(
+    "POST",
+    `/groups`,
+    props
+  );
+
+export type RouteGroupsDeleteProps = Omit<
+  MutateProps<GroupRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const RouteGroupsDelete = (props: RouteGroupsDeleteProps) => (
+  <Mutate<GroupRead[], unknown, void, void, void>
+    verb="DELETE"
+    path={`/groups`}
+    {...props}
+  />
+);
+
+export type UseRouteGroupsDeleteProps = Omit<
+  UseMutateProps<GroupRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const useRouteGroupsDelete = (props: UseRouteGroupsDeleteProps) =>
+  useMutate<GroupRead[], unknown, void, void, void>("DELETE", `/groups`, {
+    ...props,
+  });
+
+export interface RouteGroupsItemIdGetPathParams {
+  item_id: number;
+}
+
+export type RouteGroupsItemIdGetProps = Omit<
+  GetProps<
+    GroupRead,
+    HTTPValidationError,
+    void,
+    RouteGroupsItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteGroupsItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const RouteGroupsItemIdGet = ({
+  item_id,
+  ...props
+}: RouteGroupsItemIdGetProps) => (
+  <Get<GroupRead, HTTPValidationError, void, RouteGroupsItemIdGetPathParams>
+    path={`/groups/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteGroupsItemIdGetProps = Omit<
+  UseGetProps<
+    GroupRead,
+    HTTPValidationError,
+    void,
+    RouteGroupsItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteGroupsItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const useRouteGroupsItemIdGet = ({
+  item_id,
+  ...props
+}: UseRouteGroupsItemIdGetProps) =>
+  useGet<GroupRead, HTTPValidationError, void, RouteGroupsItemIdGetPathParams>(
+    (paramsInPath: RouteGroupsItemIdGetPathParams) =>
+      `/groups/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export interface RouteGroupsItemIdPutPathParams {
+  item_id: number;
+}
+
+export type RouteGroupsItemIdPutProps = Omit<
+  MutateProps<
+    GroupRead,
+    HTTPValidationError,
+    void,
+    GroupReadUpdate,
+    RouteGroupsItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteGroupsItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const RouteGroupsItemIdPut = ({
+  item_id,
+  ...props
+}: RouteGroupsItemIdPutProps) => (
+  <Mutate<
+    GroupRead,
+    HTTPValidationError,
+    void,
+    GroupReadUpdate,
+    RouteGroupsItemIdPutPathParams
+  >
+    verb="PUT"
+    path={`/groups/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteGroupsItemIdPutProps = Omit<
+  UseMutateProps<
+    GroupRead,
+    HTTPValidationError,
+    void,
+    GroupReadUpdate,
+    RouteGroupsItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteGroupsItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const useRouteGroupsItemIdPut = ({
+  item_id,
+  ...props
+}: UseRouteGroupsItemIdPutProps) =>
+  useMutate<
+    GroupRead,
+    HTTPValidationError,
+    void,
+    GroupReadUpdate,
+    RouteGroupsItemIdPutPathParams
+  >(
+    "PUT",
+    (paramsInPath: RouteGroupsItemIdPutPathParams) =>
+      `/groups/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export type RouteGroupsItemIdDeleteProps = Omit<
+  MutateProps<GroupRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const RouteGroupsItemIdDelete = (
+  props: RouteGroupsItemIdDeleteProps
+) => (
+  <Mutate<GroupRead, HTTPValidationError, void, number, void>
+    verb="DELETE"
+    path={`/groups`}
+    {...props}
+  />
+);
+
+export type UseRouteGroupsItemIdDeleteProps = Omit<
+  UseMutateProps<GroupRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const useRouteGroupsItemIdDelete = (
+  props: UseRouteGroupsItemIdDeleteProps
+) =>
+  useMutate<GroupRead, HTTPValidationError, void, number, void>(
+    "DELETE",
+    `/groups`,
+    { ...props }
+  );
+
 export interface RouteLanguagesGetQueryParams {
   skip?: number;
   limit?: number;
@@ -1335,5 +2499,313 @@ export const useRouteLanguagecategoriesItemIdDelete = (
   useMutate<LanguageCategoryRead, HTTPValidationError, void, number, void>(
     "DELETE",
     `/languagecategories`,
+    { ...props }
+  );
+
+export interface RoutePermissiontagsGetQueryParams {
+  skip?: number;
+  limit?: number;
+}
+
+export type RoutePermissiontagsGetProps = Omit<
+  GetProps<
+    PermissionTagRead[],
+    HTTPValidationError,
+    RoutePermissiontagsGetQueryParams,
+    void
+  >,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const RoutePermissiontagsGet = (props: RoutePermissiontagsGetProps) => (
+  <Get<
+    PermissionTagRead[],
+    HTTPValidationError,
+    RoutePermissiontagsGetQueryParams,
+    void
+  >
+    path={`/permissiontags`}
+    {...props}
+  />
+);
+
+export type UseRoutePermissiontagsGetProps = Omit<
+  UseGetProps<
+    PermissionTagRead[],
+    HTTPValidationError,
+    RoutePermissiontagsGetQueryParams,
+    void
+  >,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const useRoutePermissiontagsGet = (
+  props: UseRoutePermissiontagsGetProps
+) =>
+  useGet<
+    PermissionTagRead[],
+    HTTPValidationError,
+    RoutePermissiontagsGetQueryParams,
+    void
+  >(`/permissiontags`, props);
+
+export type RoutePermissiontagsPostProps = Omit<
+  MutateProps<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagCreate,
+    void
+  >,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const RoutePermissiontagsPost = (
+  props: RoutePermissiontagsPostProps
+) => (
+  <Mutate<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagCreate,
+    void
+  >
+    verb="POST"
+    path={`/permissiontags`}
+    {...props}
+  />
+);
+
+export type UseRoutePermissiontagsPostProps = Omit<
+  UseMutateProps<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagCreate,
+    void
+  >,
+  "path" | "verb"
+>;
+
+/**
+ * Create One
+ */
+export const useRoutePermissiontagsPost = (
+  props: UseRoutePermissiontagsPostProps
+) =>
+  useMutate<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagCreate,
+    void
+  >("POST", `/permissiontags`, props);
+
+export type RoutePermissiontagsDeleteProps = Omit<
+  MutateProps<PermissionTagRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const RoutePermissiontagsDelete = (
+  props: RoutePermissiontagsDeleteProps
+) => (
+  <Mutate<PermissionTagRead[], unknown, void, void, void>
+    verb="DELETE"
+    path={`/permissiontags`}
+    {...props}
+  />
+);
+
+export type UseRoutePermissiontagsDeleteProps = Omit<
+  UseMutateProps<PermissionTagRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete All
+ */
+export const useRoutePermissiontagsDelete = (
+  props: UseRoutePermissiontagsDeleteProps
+) =>
+  useMutate<PermissionTagRead[], unknown, void, void, void>(
+    "DELETE",
+    `/permissiontags`,
+    { ...props }
+  );
+
+export interface RoutePermissiontagsItemIdGetPathParams {
+  item_id: number;
+}
+
+export type RoutePermissiontagsItemIdGetProps = Omit<
+  GetProps<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    RoutePermissiontagsItemIdGetPathParams
+  >,
+  "path"
+> &
+  RoutePermissiontagsItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const RoutePermissiontagsItemIdGet = ({
+  item_id,
+  ...props
+}: RoutePermissiontagsItemIdGetProps) => (
+  <Get<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    RoutePermissiontagsItemIdGetPathParams
+  >
+    path={`/permissiontags/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRoutePermissiontagsItemIdGetProps = Omit<
+  UseGetProps<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    RoutePermissiontagsItemIdGetPathParams
+  >,
+  "path"
+> &
+  RoutePermissiontagsItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const useRoutePermissiontagsItemIdGet = ({
+  item_id,
+  ...props
+}: UseRoutePermissiontagsItemIdGetProps) =>
+  useGet<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    RoutePermissiontagsItemIdGetPathParams
+  >(
+    (paramsInPath: RoutePermissiontagsItemIdGetPathParams) =>
+      `/permissiontags/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export interface RoutePermissiontagsItemIdPutPathParams {
+  item_id: number;
+}
+
+export type RoutePermissiontagsItemIdPutProps = Omit<
+  MutateProps<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagReadUpdate,
+    RoutePermissiontagsItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RoutePermissiontagsItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const RoutePermissiontagsItemIdPut = ({
+  item_id,
+  ...props
+}: RoutePermissiontagsItemIdPutProps) => (
+  <Mutate<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagReadUpdate,
+    RoutePermissiontagsItemIdPutPathParams
+  >
+    verb="PUT"
+    path={`/permissiontags/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRoutePermissiontagsItemIdPutProps = Omit<
+  UseMutateProps<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagReadUpdate,
+    RoutePermissiontagsItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RoutePermissiontagsItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const useRoutePermissiontagsItemIdPut = ({
+  item_id,
+  ...props
+}: UseRoutePermissiontagsItemIdPutProps) =>
+  useMutate<
+    PermissionTagRead,
+    HTTPValidationError,
+    void,
+    PermissionTagReadUpdate,
+    RoutePermissiontagsItemIdPutPathParams
+  >(
+    "PUT",
+    (paramsInPath: RoutePermissiontagsItemIdPutPathParams) =>
+      `/permissiontags/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export type RoutePermissiontagsItemIdDeleteProps = Omit<
+  MutateProps<PermissionTagRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const RoutePermissiontagsItemIdDelete = (
+  props: RoutePermissiontagsItemIdDeleteProps
+) => (
+  <Mutate<PermissionTagRead, HTTPValidationError, void, number, void>
+    verb="DELETE"
+    path={`/permissiontags`}
+    {...props}
+  />
+);
+
+export type UseRoutePermissiontagsItemIdDeleteProps = Omit<
+  UseMutateProps<PermissionTagRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const useRoutePermissiontagsItemIdDelete = (
+  props: UseRoutePermissiontagsItemIdDeleteProps
+) =>
+  useMutate<PermissionTagRead, HTTPValidationError, void, number, void>(
+    "DELETE",
+    `/permissiontags`,
     { ...props }
   );

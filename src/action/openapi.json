@@ -493,6 +493,790 @@
         }
       }
     },
+    "/sites": {
+      "get": {
+        "tags": ["Sites"],
+        "summary": "Get All",
+        "operationId": "route_sites_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Sites Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/SiteRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Sites"],
+        "summary": "Create One",
+        "operationId": "route_sites_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SiteCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SiteRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Sites"],
+        "summary": "Delete All",
+        "operationId": "route_sites_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Sites Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/SiteRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sites/{item_id}": {
+      "get": {
+        "tags": ["Sites"],
+        "summary": "Get One",
+        "operationId": "route_sites__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SiteRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Sites"],
+        "summary": "Update One",
+        "operationId": "route_sites__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SiteReadUpdate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SiteRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Sites"],
+        "summary": "Delete One",
+        "operationId": "route_sites__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SiteRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Get All",
+        "operationId": "route_events_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Events Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/EventRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Events"],
+        "summary": "Create One",
+        "operationId": "route_events_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EventCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EventRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Events"],
+        "summary": "Delete All",
+        "operationId": "route_events_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Events Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/EventRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/{item_id}": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Get One",
+        "operationId": "route_events__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EventRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Events"],
+        "summary": "Update One",
+        "operationId": "route_events__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EventReadUpdate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EventRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Events"],
+        "summary": "Delete One",
+        "operationId": "route_events__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EventRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exercises": {
+      "get": {
+        "tags": ["Exercises"],
+        "summary": "Get All",
+        "operationId": "route_exercises_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Exercises Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ExerciseRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Exercises"],
+        "summary": "Create One",
+        "operationId": "route_exercises_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ExerciseCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExerciseRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Exercises"],
+        "summary": "Delete All",
+        "operationId": "route_exercises_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Exercises Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ExerciseRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exercises/{item_id}": {
+      "get": {
+        "tags": ["Exercises"],
+        "summary": "Get One",
+        "operationId": "route_exercises__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExerciseRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Exercises"],
+        "summary": "Update One",
+        "operationId": "route_exercises__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ExerciseReadUpdate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExerciseRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Exercises"],
+        "summary": "Delete One",
+        "operationId": "route_exercises__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExerciseRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups": {
+      "get": {
+        "tags": ["Groups"],
+        "summary": "Get All",
+        "operationId": "route_groups_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Groups Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/GroupRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Groups"],
+        "summary": "Create One",
+        "operationId": "route_groups_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GroupCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GroupRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Groups"],
+        "summary": "Delete All",
+        "operationId": "route_groups_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Groups Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/GroupRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{item_id}": {
+      "get": {
+        "tags": ["Groups"],
+        "summary": "Get One",
+        "operationId": "route_groups__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GroupRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Groups"],
+        "summary": "Update One",
+        "operationId": "route_groups__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GroupReadUpdate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GroupRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Groups"],
+        "summary": "Delete One",
+        "operationId": "route_groups__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GroupRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/languages": {
       "get": {
         "tags": ["Languages"],
@@ -900,6 +1684,204 @@
           }
         }
       }
+    },
+    "/permissiontags": {
+      "get": {
+        "tags": ["Permissiontags"],
+        "summary": "Get All",
+        "operationId": "route_permissiontags_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "title": "Skip", "type": "integer", "default": 0 },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Limit", "type": "integer" },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Permissiontags Get",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/PermissionTagRead" }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Permissiontags"],
+        "summary": "Create One",
+        "operationId": "route_permissiontags_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PermissionTagCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PermissionTagRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Permissiontags"],
+        "summary": "Delete All",
+        "operationId": "route_permissiontags_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Route Permissiontags Delete",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/PermissionTagRead" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permissiontags/{item_id}": {
+      "get": {
+        "tags": ["Permissiontags"],
+        "summary": "Get One",
+        "operationId": "route_permissiontags__item_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PermissionTagRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Permissiontags"],
+        "summary": "Update One",
+        "operationId": "route_permissiontags__item_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionTagReadUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PermissionTagRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Permissiontags"],
+        "summary": "Delete One",
+        "operationId": "route_permissiontags__item_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Item Id", "type": "integer" },
+            "name": "item_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PermissionTagRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1007,6 +1989,269 @@
           "client_secret": { "title": "Client Secret", "type": "string" }
         }
       },
+      "EventCreate": {
+        "title": "EventCreate",
+        "required": [
+          "name",
+          "open_at",
+          "start_at",
+          "end_at",
+          "infil_suspend_at",
+          "exfil_suspend_at",
+          "po_suspend_at",
+          "final_suspend_at",
+          "allow_override_dates"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "open_at": {
+            "title": "Open At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "start_at": {
+            "title": "Start At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_at": {
+            "title": "End At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "infil_suspend_at": {
+            "title": "Infil Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "exfil_suspend_at": {
+            "title": "Exfil Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "po_suspend_at": {
+            "title": "Po Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "final_suspend_at": {
+            "title": "Final Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "allow_override_dates": {
+            "title": "Allow Override Dates",
+            "type": "boolean"
+          }
+        }
+      },
+      "EventRead": {
+        "title": "EventRead",
+        "required": [
+          "name",
+          "open_at",
+          "start_at",
+          "end_at",
+          "infil_suspend_at",
+          "exfil_suspend_at",
+          "po_suspend_at",
+          "final_suspend_at",
+          "allow_override_dates",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "open_at": {
+            "title": "Open At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "start_at": {
+            "title": "Start At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_at": {
+            "title": "End At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "infil_suspend_at": {
+            "title": "Infil Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "exfil_suspend_at": {
+            "title": "Exfil Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "po_suspend_at": {
+            "title": "Po Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "final_suspend_at": {
+            "title": "Final Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "allow_override_dates": {
+            "title": "Allow Override Dates",
+            "type": "boolean"
+          },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "EventReadUpdate": {
+        "title": "EventReadUpdate",
+        "required": [
+          "name",
+          "open_at",
+          "start_at",
+          "end_at",
+          "infil_suspend_at",
+          "exfil_suspend_at",
+          "po_suspend_at",
+          "final_suspend_at",
+          "allow_override_dates"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "open_at": {
+            "title": "Open At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "start_at": {
+            "title": "Start At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_at": {
+            "title": "End At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "infil_suspend_at": {
+            "title": "Infil Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "exfil_suspend_at": {
+            "title": "Exfil Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "po_suspend_at": {
+            "title": "Po Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "final_suspend_at": {
+            "title": "Final Suspend At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "allow_override_dates": {
+            "title": "Allow Override Dates",
+            "type": "boolean"
+          }
+        }
+      },
+      "ExerciseCreate": {
+        "title": "ExerciseCreate",
+        "required": [
+          "name",
+          "description",
+          "background_color",
+          "text_color",
+          "GroupId"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "background_color": { "title": "Background Color", "type": "string" },
+          "text_color": { "title": "Text Color", "type": "string" },
+          "GroupId": { "title": "Groupid", "type": "integer" }
+        }
+      },
+      "ExerciseRead": {
+        "title": "ExerciseRead",
+        "required": [
+          "name",
+          "description",
+          "background_color",
+          "text_color",
+          "GroupId",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "background_color": { "title": "Background Color", "type": "string" },
+          "text_color": { "title": "Text Color", "type": "string" },
+          "GroupId": { "title": "Groupid", "type": "integer" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "ExerciseReadUpdate": {
+        "title": "ExerciseReadUpdate",
+        "required": [
+          "name",
+          "description",
+          "background_color",
+          "text_color",
+          "GroupId"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "background_color": { "title": "Background Color", "type": "string" },
+          "text_color": { "title": "Text Color", "type": "string" },
+          "GroupId": { "title": "Groupid", "type": "integer" }
+        }
+      },
+      "GroupCreate": {
+        "title": "GroupCreate",
+        "required": ["name", "unit", "lead_one", "lead_two"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "unit": { "title": "Unit", "type": "string" },
+          "lead_one": { "title": "Lead One", "type": "string" },
+          "lead_two": { "title": "Lead Two", "type": "string" }
+        }
+      },
+      "GroupRead": {
+        "title": "GroupRead",
+        "required": ["name", "unit", "lead_one", "lead_two", "id"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "unit": { "title": "Unit", "type": "string" },
+          "lead_one": { "title": "Lead One", "type": "string" },
+          "lead_two": { "title": "Lead Two", "type": "string" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "GroupReadUpdate": {
+        "title": "GroupReadUpdate",
+        "required": ["name", "unit", "lead_one", "lead_two"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "unit": { "title": "Unit", "type": "string" },
+          "lead_one": { "title": "Lead One", "type": "string" },
+          "lead_two": { "title": "Lead Two", "type": "string" }
+        }
+      },
       "HTTPValidationError": {
         "title": "HTTPValidationError",
         "type": "object",
@@ -1074,6 +2319,34 @@
           "comment": { "title": "Comment", "type": "string" }
         }
       },
+      "PermissionTagCreate": {
+        "title": "PermissionTagCreate",
+        "required": ["name", "description"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" }
+        }
+      },
+      "PermissionTagRead": {
+        "title": "PermissionTagRead",
+        "required": ["name", "description", "id"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "PermissionTagReadUpdate": {
+        "title": "PermissionTagReadUpdate",
+        "required": ["name", "description"],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" }
+        }
+      },
       "RoleCreate": {
         "title": "RoleCreate",
         "required": ["name", "description", "pay"],
@@ -1103,6 +2376,98 @@
           "name": { "title": "Name", "type": "string" },
           "description": { "title": "Description", "type": "string" },
           "pay": { "title": "Pay", "type": "number" }
+        }
+      },
+      "SiteCreate": {
+        "title": "SiteCreate",
+        "required": [
+          "name",
+          "description",
+          "country",
+          "city",
+          "state",
+          "latitude",
+          "latitude_min",
+          "latitude_sec",
+          "longitude",
+          "longitude_min",
+          "longitude_sec"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "country": { "title": "Country", "type": "string" },
+          "city": { "title": "City", "type": "string" },
+          "state": { "title": "State", "type": "string" },
+          "latitude": { "title": "Latitude", "type": "number" },
+          "latitude_min": { "title": "Latitude Min", "type": "number" },
+          "latitude_sec": { "title": "Latitude Sec", "type": "number" },
+          "longitude": { "title": "Longitude", "type": "number" },
+          "longitude_min": { "title": "Longitude Min", "type": "number" },
+          "longitude_sec": { "title": "Longitude Sec", "type": "number" }
+        }
+      },
+      "SiteRead": {
+        "title": "SiteRead",
+        "required": [
+          "name",
+          "description",
+          "country",
+          "city",
+          "state",
+          "latitude",
+          "latitude_min",
+          "latitude_sec",
+          "longitude",
+          "longitude_min",
+          "longitude_sec",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "country": { "title": "Country", "type": "string" },
+          "city": { "title": "City", "type": "string" },
+          "state": { "title": "State", "type": "string" },
+          "latitude": { "title": "Latitude", "type": "number" },
+          "latitude_min": { "title": "Latitude Min", "type": "number" },
+          "latitude_sec": { "title": "Latitude Sec", "type": "number" },
+          "longitude": { "title": "Longitude", "type": "number" },
+          "longitude_min": { "title": "Longitude Min", "type": "number" },
+          "longitude_sec": { "title": "Longitude Sec", "type": "number" },
+          "id": { "title": "Id", "type": "integer" }
+        }
+      },
+      "SiteReadUpdate": {
+        "title": "SiteReadUpdate",
+        "required": [
+          "name",
+          "description",
+          "country",
+          "city",
+          "state",
+          "latitude",
+          "latitude_min",
+          "latitude_sec",
+          "longitude",
+          "longitude_min",
+          "longitude_sec"
+        ],
+        "type": "object",
+        "properties": {
+          "name": { "title": "Name", "type": "string" },
+          "description": { "title": "Description", "type": "string" },
+          "country": { "title": "Country", "type": "string" },
+          "city": { "title": "City", "type": "string" },
+          "state": { "title": "State", "type": "string" },
+          "latitude": { "title": "Latitude", "type": "number" },
+          "latitude_min": { "title": "Latitude Min", "type": "number" },
+          "latitude_sec": { "title": "Latitude Sec", "type": "number" },
+          "longitude": { "title": "Longitude", "type": "number" },
+          "longitude_min": { "title": "Longitude Min", "type": "number" },
+          "longitude_sec": { "title": "Longitude Sec", "type": "number" }
         }
       },
       "Token": {

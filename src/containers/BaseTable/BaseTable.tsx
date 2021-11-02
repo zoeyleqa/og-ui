@@ -6,6 +6,7 @@ import { IconAwesome } from "../../components/Icons/IconAwesome";
 import "./style.css";
 
 interface BaseTableProps {
+  id: string;
   data: object[];
   header: any[];
   updateMyData: (rowIndex: any, rowValue: any) => void;
@@ -14,6 +15,7 @@ interface BaseTableProps {
 }
 
 const BaseTable = ({
+  id,
   data,
   header,
   updateMyData,
@@ -63,7 +65,7 @@ const BaseTable = ({
           {toolComponent}
         </Col>
       </Row>
-      <table {...getTableProps()}>
+      <table {...getTableProps()} id={id}>
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>

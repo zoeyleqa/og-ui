@@ -3,8 +3,6 @@ import { ActionCell } from "./ActionButtonsCell";
 import { AddRoleButton } from "./AddRoleButton";
 import { BaseTable } from "../BaseTable";
 import { Preloader } from "../../components/Preloader";
-import { Row, Col } from "react-bootstrap";
-import { TableFilter } from "../../components/TableFilter/TableFilter";
 import { RestfulProvider } from "restful-react";
 import {
   useRouteRolesGet,
@@ -12,9 +10,8 @@ import {
   useRouteRolesItemIdPut,
   useRouteRolesItemIdDelete
 } from "../../action/actions";
-import "./style.css";
 
-export const roleTableHeader = [
+const roleTableHeader = [
   {
     Header: "Role",
     accessor: "name"
@@ -34,7 +31,7 @@ const actionButtons = (
   deleteRow: (rowIndex: number) => void
 ) => ({
   id: "Actions",
-  Header: "Actions",
+  Header: "",
   accessor: "action-buttons",
   disableSortBy: true,
   Cell: ({ row }: { row: any }) => (
@@ -54,11 +51,12 @@ const RolesDataTable = () => {
   const { data: roleOriginalData, loading } = useRouteRolesGet({});
 
   const [roleData, setRoleData] = useState<any[] | null>(null);
+  const [header, setHeader] = useState<any[]>(roleTableHeader);
 
   useEffect(() => {
     if (!loading) {
       setRoleData(roleOriginalData);
-      roleTableHeader.push(actionButtons(updateRole, deleteRole));
+      setHeader(roleTableHeader.concat(actionButtons(updateRole, deleteRole)));
     }
   }, [loading]);
 
@@ -107,11 +105,14 @@ const RolesDataTable = () => {
 
   return !loading && roleData ? (
     <BaseTable
+      id="rolesTable"
       data={roleData}
-      header={roleTableHeader}
+      header={header}
       updateMyData={updateRole}
       skipReset={skipResetRef}
-      toolComponent={<AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />}
+      toolComponent={
+        <AddRoleButton addHandler={useRouteRolesPost} addRow={addRole} />
+      }
     />
   ) : (
     <Preloader />

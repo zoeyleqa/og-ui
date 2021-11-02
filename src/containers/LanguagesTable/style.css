@@ -1,0 +1,4 @@
+#languagesTable td:not(:last-child) {
+  min-width: 10rem;
+  max-width: 20rem;
+}

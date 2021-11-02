@@ -1,5 +1,4 @@
 import React from "react";
-import { Story } from "@storybook/react";
 import { RolesTable } from "./RolesTable";
 import * as roles from "./dummyData";
 import "bootstrap/dist/css/bootstrap.min.css";
