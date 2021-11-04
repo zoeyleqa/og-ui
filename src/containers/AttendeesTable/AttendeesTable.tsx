@@ -10,6 +10,7 @@ import {
   useRouteAttendeesItemIdPut,
   useRouteAttendeesItemIdDelete
 } from "../../action/actions";
+import { concatData } from "./helpers";
 
 const attendeeTableHeader = [
   {
@@ -38,16 +39,28 @@ const attendeeTableHeader = [
   },
   {
     Header: "Language",
-    accessor: "language.name"
+    accessor: "langs",
+    disableSortBy: true,
+    Cell: ({ row }: { row: { values: any } }) => {
+      return <span>{concatData(row, "langs")}</span>;
+    }
   },
   {
     Header: "Language Category",
-    accessor: "langCat"
+    accessor: "lang_cats",
+    disableSortBy: true,
+    Cell: ({ row }: { row: { values: any } }) => {
+      return <span>{concatData(row, "lang_cats")}</span>;
+    }
   },
   {
     Header: "Role",
-    accessor: "role"
-  },
+    accessor: "roles",
+    disableSortBy: true,
+    Cell: ({ row }: { row: { values: any } }) => {
+      return <span>{concatData(row, "roles")}</span>;
+    }
+  }
 ];
 
 const actionButtons = (
@@ -80,7 +93,11 @@ const AttendeesDataTable = () => {
   useEffect(() => {
     if (!loading) {
       setAttendeeData(attendeeOriginalData);
-      setHeader(attendeeTableHeader.concat(actionButtons(updateAttendee, deleteAttendee)));
+      setHeader(
+        attendeeTableHeader.concat(
+          actionButtons(updateAttendee, deleteAttendee)
+        )
+      );
     }
   }, [loading]);
 
@@ -135,7 +152,10 @@ const AttendeesDataTable = () => {
       updateMyData={updateAttendee}
       skipReset={skipResetRef}
       toolComponent={
-        <AddAttendeeButton addHandler={useRouteAttendeesPost} addRow={addAttendee} />
+        <AddAttendeeButton
+          addHandler={useRouteAttendeesPost}
+          addRow={addAttendee}
+        />
       }
     />
   ) : (
