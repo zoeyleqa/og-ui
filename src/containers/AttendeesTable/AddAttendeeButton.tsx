@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { Drawer } from "../../components/Drawer";
 
 const formId = "add-attendee-form";
-const drawerId = "add";
+const drawerId = "add-attendee";
 
 interface AddAttendeeProps {
   addHandler: any;

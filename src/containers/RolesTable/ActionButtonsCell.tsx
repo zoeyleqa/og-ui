@@ -4,6 +4,8 @@ import { Drawer } from "../../components/Drawer";
 import { DeleteRoleModal } from "./DeleteRoleModal";
 import { EditRoleForm } from "./EditRoleForm";
 
+const drawerId = "edit-role";
+
 interface ActionCellProps {
   rowId: string;
   row: any;
@@ -30,27 +32,27 @@ export const ActionCell = ({
   const roleId = parseInt(row.id);
 
   const toggleDeletePanel = () => setDeletePanel(!showDeletePanel);
-  const toggleEditPanel = () => {
-    if (showEditPanel) {
-      let closeBtn = document.getElementById(`offcanvas-close-edit-${roleId}`);
-      if (closeBtn) closeBtn.click();
-    }
+  // const toggleEditPanel = () => {
+  //   if (showEditPanel) {
+  //     let closeBtn = document.getElementById(`offcanvas-close-${drawerId}-${roleId}`);
+  //     if (closeBtn) closeBtn.click();
+  //   }
 
-    setEditPanel(!showEditPanel);
-  };
+  //   setEditPanel(!showEditPanel);
+  // };
 
   return (
     <>
       <Button
-        onClick={toggleEditPanel}
+        onClick={()=> {}}
         type="edit"
         disabled={disabled}
         data-bs-toggle="offcanvas"
-        data-bs-target={`#offcanvas-edit-${roleId}`}
-        aria-controls={`offcanvas-edit-${roleId}`}
+        data-bs-target={`#offcanvas-${drawerId}-${roleId}`}
+        aria-controls={`offcanvvas-${drawerId}-${roleId}`}
       />
       <Drawer
-        id={roleId}
+        id={`${drawerId}-${roleId}`}
         title="Edit Role"
         show={showEditPanel}
         content={
@@ -60,7 +62,7 @@ export const ActionCell = ({
             roleData={row}
             editHandler={editHandler}
             updateRow={updateRow}
-            toggleDrawer={toggleEditPanel}
+            toggleDrawer={()=>{}}
           />
         }
       />

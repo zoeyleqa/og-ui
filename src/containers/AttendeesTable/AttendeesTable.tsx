@@ -55,10 +55,10 @@ const attendeeTableHeader = [
   },
   {
     Header: "Role",
-    accessor: "roles",
+    accessor: "attendee_roles",
     disableSortBy: true,
     Cell: ({ row }: { row: { values: any } }) => {
-      return <span>{concatData(row, "roles")}</span>;
+      return <span>{concatData(row, "attendee_roles")}</span>;
     }
   }
 ];

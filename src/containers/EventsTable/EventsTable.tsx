@@ -13,7 +13,7 @@ import {
 const eventTableHeader = [
   {
     Header: "Exercise",
-    accessor: "exercise.name"
+    accessor: "event_exercise.name"
   },
   {
     Header: "Event",
