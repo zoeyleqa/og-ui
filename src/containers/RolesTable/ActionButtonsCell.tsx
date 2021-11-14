@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button } from "../../components/Button";
 import { Drawer } from "../../components/Drawer";
 import { DeleteRoleModal } from "./DeleteRoleModal";
 import { EditRoleForm } from "./EditRoleForm";
+import Offcanvas from "bootstrap/js/dist/offcanvas";
 
 const drawerId = "edit-role";
 
@@ -26,35 +27,42 @@ export const ActionCell = ({
   deleteRow,
   disabled = false
 }: ActionCellProps) => {
-  const [showEditPanel, setEditPanel] = useState(false);
   const [showDeletePanel, setDeletePanel] = useState(false);
+  const offcanvasEl = useRef<HTMLElement | null>(null);
+  const drawerObj = useRef<Offcanvas | null>(null);
 
   const roleId = parseInt(row.id);
 
-  const toggleDeletePanel = () => setDeletePanel(!showDeletePanel);
-  // const toggleEditPanel = () => {
-  //   if (showEditPanel) {
-  //     let closeBtn = document.getElementById(`offcanvas-close-${drawerId}-${roleId}`);
-  //     if (closeBtn) closeBtn.click();
-  //   }
+  useEffect(() => {
+    if (!offcanvasEl.current) {
+      offcanvasEl.current = document.getElementById(
+        `offcanvas-${drawerId}-${roleId}`
+      );
 
-  //   setEditPanel(!showEditPanel);
-  // };
+      if (offcanvasEl.current && !drawerObj.current) {
+        drawerObj.current = new Offcanvas(offcanvasEl.current);
+      }
+    }
+  }, []);
+
+  const toggleDeletePanel = () => setDeletePanel(!showDeletePanel);
+  const toggleEditPanel = () => {
+    if (drawerObj.current) {
+      drawerObj.current.toggle();
+    }
+  };
 
   return (
     <>
       <Button
-        onClick={()=> {}}
+        onClick={toggleEditPanel}
         type="edit"
         disabled={disabled}
-        data-bs-toggle="offcanvas"
-        data-bs-target={`#offcanvas-${drawerId}-${roleId}`}
         aria-controls={`offcanvvas-${drawerId}-${roleId}`}
       />
       <Drawer
         id={`${drawerId}-${roleId}`}
         title="Edit Role"
-        show={showEditPanel}
         content={
           <EditRoleForm
             id={roleId}
@@ -62,7 +70,7 @@ export const ActionCell = ({
             roleData={row}
             editHandler={editHandler}
             updateRow={updateRow}
-            toggleDrawer={()=>{}}
+            toggleDrawer={toggleEditPanel}
           />
         }
       />

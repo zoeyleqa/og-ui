@@ -37,12 +37,12 @@ export const EditRoleForm = ({
 
     update({ ...args })
       .then((retData: { id: any }) => {
-        updateRow(parseInt(rowId), retData);
         toggleDrawer();
+        updateRow(parseInt(rowId), retData);
       })
       .catch((e: any) => {
-        console.error(e);
         toggleDrawer();
+        console.error(e);
       });
   };
 

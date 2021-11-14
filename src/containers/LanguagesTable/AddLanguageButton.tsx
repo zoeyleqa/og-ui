@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { Form, Row, Col } from "react-bootstrap";
 import { Button } from "../../components/Button";
 import { Drawer } from "../../components/Drawer";
+import Offcanvas from "bootstrap/js/dist/offcanvas";
 
 const formId = "add-language-form";
-const drawerId = "add";
+const drawerId = "add-language";
 
 interface AddLanguageProps {
   addHandler: any;
@@ -14,17 +15,24 @@ interface AddLanguageProps {
 export const AddLanguageButton = ({ addHandler, addRow }: AddLanguageProps) => {
   const { mutate: add, loading } = addHandler({});
 
-  const [showAddPanel, setAddPanel] = useState(false);
+  const offcanvasEl = useRef<HTMLElement | null>(null);
+  const drawerObj = useRef<Offcanvas | null>(null);
 
-  const toggleEditPanel = () => {
-    if (showAddPanel) {
-      let closeBtn = document.getElementById(`offcanvas-${drawerId}-close`);
-      if (closeBtn) closeBtn.click();
+  useEffect(() => {
+    if (!offcanvasEl.current) {
+      offcanvasEl.current = document.getElementById(`offcanvas-${drawerId}`);
+
+      if (offcanvasEl.current && !drawerObj.current) {
+        drawerObj.current = new Offcanvas(offcanvasEl.current);
+      }
     }
+  }, []);
 
-    setAddPanel(!showAddPanel);
+  const toggleAddPanel = () => {
+    if (drawerObj.current) {
+      drawerObj.current.toggle();
+    }
   };
-
   const addLanguage = () => {
     const form = document.getElementById(formId) as HTMLFormElement;
 
@@ -40,28 +48,25 @@ export const AddLanguageButton = ({ addHandler, addRow }: AddLanguageProps) => {
     add({ ...args })
       .then((retData: { id: any }) => {
         addRow(retData);
-        toggleEditPanel();
+        toggleAddPanel();
       })
       .catch((e: any) => {
         console.error(e);
-        toggleEditPanel();
+        toggleAddPanel();
       });
   };
 
   return (
     <>
       <Button
-        onClick={toggleEditPanel}
+        onClick={toggleAddPanel}
         type="add"
         label="New Language"
-        data-bs-toggle="offcanvas"
-        data-bs-target={`#offcanvas-${drawerId}`}
         aria-controls={`offcanvas-${drawerId}`}
       />
       <Drawer
         id={drawerId}
         title="Add New Language"
-        show={showAddPanel}
         content={
           <Form id={formId}>
             <Form.Group as={Row} className="mb-3" controlId="languagename">

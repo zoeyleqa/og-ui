@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button } from "../../components/Button";
 import { Drawer } from "../../components/Drawer";
 import { DeleteAttendeeModal } from "./DeleteAttendeeModal";
 import { EditAttendeeForm } from "./EditAttendeeForm";
+import Offcanvas from "bootstrap/js/dist/offcanvas";
+
+const drawerId = "edit-attendee";
 
 interface ActionCellProps {
   rowId: string;
@@ -24,19 +27,29 @@ export const ActionCell = ({
   deleteRow,
   disabled = false
 }: ActionCellProps) => {
-  const [showEditPanel, setEditPanel] = useState(false);
   const [showDeletePanel, setDeletePanel] = useState(false);
+  const offcanvasEl = useRef<HTMLElement | null>(null);
+  const drawerObj = useRef<Offcanvas | null>(null);
 
   const attendeeId = parseInt(row.id);
 
+  useEffect(() => {
+    if (!offcanvasEl.current) {
+      offcanvasEl.current = document.getElementById(
+        `offcanvas-${drawerId}-${attendeeId}`
+      );
+
+      if (offcanvasEl.current && !drawerObj.current) {
+        drawerObj.current = new Offcanvas(offcanvasEl.current);
+      }
+    }
+  }, []);
+
   const toggleDeletePanel = () => setDeletePanel(!showDeletePanel);
   const toggleEditPanel = () => {
-    if (showEditPanel) {
-      let closeBtn = document.getElementById(`offcanvas-close-edit-${attendeeId}`);
-      if (closeBtn) closeBtn.click();
+    if (drawerObj.current) {
+      drawerObj.current.toggle();
     }
-
-    setEditPanel(!showEditPanel);
   };
 
   return (
@@ -45,14 +58,11 @@ export const ActionCell = ({
         onClick={toggleEditPanel}
         type="edit"
         disabled={disabled}
-        data-bs-toggle="offcanvas"
-        data-bs-target={`#offcanvas-edit-${attendeeId}`}
         aria-controls={`offcanvas-edit-${attendeeId}`}
       />
       <Drawer
-        id={attendeeId}
+        id={`${drawerId}-${attendeeId}`}
         title="Edit Attendee"
-        show={showEditPanel}
         content={
           <EditAttendeeForm
             id={attendeeId}
