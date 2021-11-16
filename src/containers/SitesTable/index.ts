@@ -1,1 +1,0 @@
-export { SitesTable } from "./SitesTable";

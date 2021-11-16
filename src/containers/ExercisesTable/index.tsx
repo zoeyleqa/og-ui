@@ -1,31 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ActionCell } from "./ActionButtonsCell";
-import { AddGroupButton } from "./AddGroupButton";
+import { AddExerciseButton } from "./AddExerciseButton";
 import { BaseTable } from "../BaseTable";
 import { Preloader } from "../../components/Preloader";
 import { RestfulProvider } from "restful-react";
 import {
-  useRouteGroupsGet,
-  useRouteGroupsPost,
-  useRouteGroupsItemIdDelete
+  useRouteExercisesGet,
+  useRouteExercisesPost,
+  useRouteExercisesItemIdDelete
 } from "../../action/actions";
 
-const groupTableHeader = [
+const exerciseTableHeader = [
   {
     Header: "Group",
+    accessor: "group.name"
+  },
+  {
+    Header: "Exercise",
     accessor: "name"
   },
   {
-    Header: "Unit",
-    accessor: "unit"
+    Header: "Description",
+    accessor: "description"
   },
   {
-    Header: "Lead 1",
-    accessor: "lead_one"
+    Header: "Background Color",
+    accessor: "background_color"
   },
   {
-    Header: "Lead 2",
-    accessor: "lead_two"
+    Header: "Text Color",
+    accessor: "text_color"
   }
 ];
 
@@ -38,37 +42,37 @@ const actionButtons = (deleteRow: (rowIndex: number) => void) => ({
     <ActionCell
       rowId={row.id}
       row={row.original}
-      deleteHandler={useRouteGroupsItemIdDelete}
+      deleteHandler={useRouteExercisesItemIdDelete}
       deleteRow={deleteRow}
     />
   ),
   sortable: false
 });
 
-const GroupsDataTable = () => {
-  const { data: groupOriginalData, loading } = useRouteGroupsGet({});
+const ExerciseDataTable = () => {
+  const { data: exerciseOriginalData, loading } = useRouteExercisesGet({});
 
-  const [groupData, setGroupData] = useState<any[] | null>(null);
-  const [header, setHeader] = useState<any[]>(groupTableHeader);
+  const [exerciseData, setExerciseData] = useState<any[] | null>(null);
+  const [header, setHeader] = useState<any[]>(exerciseTableHeader);
 
   useEffect(() => {
     if (!loading) {
-      setGroupData(groupOriginalData);
-      setHeader(groupTableHeader.concat(actionButtons(deleteGroup)));
+      setExerciseData(exerciseOriginalData);
+      setHeader(exerciseTableHeader.concat(actionButtons(deleteExercise)));
     }
   }, [loading]);
 
   useEffect(() => {
     skipResetRef.current = false;
-  }, [groupData]);
+  }, [exerciseData]);
 
   // We need to keep the table from resetting the pageIndex when we
   // Update data. So we can keep track of that flag with a ref.
   const skipResetRef = useRef(false);
 
-  const deleteGroup = (rowIndex: number) => {
+  const deleteExercise = (rowIndex: number) => {
     skipResetRef.current = true;
-    setGroupData((old: any[] | null) =>
+    setExerciseData((old: any[] | null) =>
       !old
         ? old
         : old.filter((_, index) => {
@@ -77,20 +81,20 @@ const GroupsDataTable = () => {
     );
   };
 
-  const addGroup = (row: any) => {
+  const addExercise = (row: any) => {
     skipResetRef.current = true;
-    setGroupData((old: any[] | null) => (!old ? [row] : [...old, row]));
+    setExerciseData((old: any[] | null) => (!old ? [row] : [...old, row]));
   };
 
-  return !loading && groupData ? (
+  return !loading && exerciseData ? (
     <BaseTable
-      id="groupsTable"
-      data={groupData}
+      id="exercisesTable"
+      data={exerciseData}
       header={header}
       updateMyData={() => {}}
       skipReset={skipResetRef}
       toolComponent={
-        <AddGroupButton addHandler={useRouteGroupsPost} addRow={addGroup} />
+        <AddExerciseButton addHandler={useRouteExercisesPost} addRow={addExercise} />
       }
     />
   ) : (
@@ -98,12 +102,12 @@ const GroupsDataTable = () => {
   );
 };
 
-const GroupsTable = ({ baseUrl }: { baseUrl: string }) => {
+const ExerciseTable = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <RestfulProvider base={baseUrl}>
-      <GroupsDataTable />
+      <ExerciseDataTable />
     </RestfulProvider>
   );
 };
 
-export { GroupsTable };
+export { ExerciseTable };

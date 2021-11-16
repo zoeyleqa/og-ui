@@ -16,6 +16,9 @@ export interface AttendeeCreate {
   first_name: string;
   middle_name: string;
   last_name: string;
+  nick_name: string;
+  suffix: string;
+  sex: string;
   email: string;
   street: string;
   city: string;
@@ -29,6 +32,9 @@ export interface AttendeeRead {
   first_name: string;
   middle_name: string;
   last_name: string;
+  nick_name: string;
+  suffix: string;
+  sex: string;
   email: string;
   street: string;
   city: string;
@@ -37,12 +43,18 @@ export interface AttendeeRead {
   status: string;
   is_us_citizen: boolean;
   id: number;
+  langs?: LanguageCreate[];
+  lang_cats?: LanguageCategoryCreate[];
+  attendee_roles?: RoleCreate[];
 }
 
 export interface AttendeeReadUpdate {
   first_name: string;
   middle_name: string;
   last_name: string;
+  nick_name: string;
+  suffix: string;
+  sex: string;
   email: string;
   street: string;
   city: string;
@@ -50,6 +62,9 @@ export interface AttendeeReadUpdate {
   country_code: string;
   status: string;
   is_us_citizen: boolean;
+  langs: LanguageCreate;
+  lang_cats: LanguageCategoryCreate;
+  attendee_roles: RoleCreate;
 }
 
 export interface BodyLoginLoginPost {
@@ -71,6 +86,8 @@ export interface EventCreate {
   po_suspend_at: string;
   final_suspend_at: string;
   allow_override_dates: boolean;
+  SubGroupId: number;
+  event_exercise?: ExerciseCreate;
 }
 
 export interface EventRead {
@@ -83,6 +100,8 @@ export interface EventRead {
   po_suspend_at: string;
   final_suspend_at: string;
   allow_override_dates: boolean;
+  SubGroupId: number;
+  event_exercise?: ExerciseCreate;
   id: number;
 }
 
@@ -96,22 +115,31 @@ export interface EventReadUpdate {
   po_suspend_at: string;
   final_suspend_at: string;
   allow_override_dates: boolean;
+  SubGroupId: number;
+  event_exercise: ExerciseCreate;
 }
 
 export interface ExerciseCreate {
   name: string;
-  description: string;
+  description?: string;
   background_color: string;
   text_color: string;
-  GroupId: number;
+  group_id: number;
+  group?: GroupCreate;
+}
+
+export interface ExerciseNameRead {
+  id: number;
+  name: string;
 }
 
 export interface ExerciseRead {
   name: string;
-  description: string;
+  description?: string;
   background_color: string;
   text_color: string;
-  GroupId: number;
+  group_id: number;
+  group?: GroupCreate;
   id: number;
 }
 
@@ -120,7 +148,8 @@ export interface ExerciseReadUpdate {
   description: string;
   background_color: string;
   text_color: string;
-  GroupId: number;
+  group_id: number;
+  group: GroupCreate;
 }
 
 export interface GroupCreate {
@@ -182,19 +211,16 @@ export interface LanguageReadUpdate {
 }
 
 export interface PermissionTagCreate {
-  name: string;
-  description: string;
+  tag: string;
 }
 
 export interface PermissionTagRead {
-  name: string;
-  description: string;
+  tag: string;
   id: number;
 }
 
 export interface PermissionTagReadUpdate {
-  name: string;
-  description: string;
+  tag: string;
 }
 
 export interface RoleCreate {
@@ -282,6 +308,28 @@ export interface UserRead {
   admin?: boolean;
   id: number;
   last_sign_in: string;
+  user_access_rights?: UserTagPermLinkRead[];
+  user_exercises?: ExerciseNameRead[];
+}
+
+export interface UserReadUpdate {
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  admin: boolean;
+  id: number;
+  last_sign_in: string;
+  user_access_rights: UserTagPermLinkRead;
+  user_exercises: ExerciseNameRead;
+}
+
+export interface UserTagPermLinkRead {
+  tag: string;
+  access_rights: string;
+  id: number;
+  hr_id: number;
 }
 
 export interface ValidationError {
@@ -321,6 +369,29 @@ export const useLoginLoginPost = (props: UseLoginLoginPostProps) =>
     props
   );
 
+export type GetAllUsersGetProps = Omit<
+  GetProps<UserRead[], unknown, void, void>,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const GetAllUsersGet = (props: GetAllUsersGetProps) => (
+  <Get<UserRead[], unknown, void, void> path={`/users`} {...props} />
+);
+
+export type UseGetAllUsersGetProps = Omit<
+  UseGetProps<UserRead[], unknown, void, void>,
+  "path"
+>;
+
+/**
+ * Get All
+ */
+export const useGetAllUsersGet = (props: UseGetAllUsersGetProps) =>
+  useGet<UserRead[], unknown, void, void>(`/users`, props);
+
 export type CreateUsersPostProps = Omit<
   MutateProps<UserRead, HTTPValidationError, void, UserCreate, void>,
   "path" | "verb"
@@ -352,39 +423,181 @@ export const useCreateUsersPost = (props: UseCreateUsersPostProps) =>
     props
   );
 
-export interface ShowUsersIdGetPathParams {
-  id: number;
-}
-
-export type ShowUsersIdGetProps = Omit<
-  GetProps<UserRead, HTTPValidationError, void, ShowUsersIdGetPathParams>,
-  "path"
-> &
-  ShowUsersIdGetPathParams;
+export type RouteUsersDeleteProps = Omit<
+  MutateProps<UserRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
 
 /**
- * Show
+ * Delete All
  */
-export const ShowUsersIdGet = ({ id, ...props }: ShowUsersIdGetProps) => (
-  <Get<UserRead, HTTPValidationError, void, ShowUsersIdGetPathParams>
-    path={`/users/${id}`}
+export const RouteUsersDelete = (props: RouteUsersDeleteProps) => (
+  <Mutate<UserRead[], unknown, void, void, void>
+    verb="DELETE"
+    path={`/users`}
     {...props}
   />
 );
 
-export type UseShowUsersIdGetProps = Omit<
-  UseGetProps<UserRead, HTTPValidationError, void, ShowUsersIdGetPathParams>,
-  "path"
-> &
-  ShowUsersIdGetPathParams;
+export type UseRouteUsersDeleteProps = Omit<
+  UseMutateProps<UserRead[], unknown, void, void, void>,
+  "path" | "verb"
+>;
 
 /**
- * Show
+ * Delete All
  */
-export const useShowUsersIdGet = ({ id, ...props }: UseShowUsersIdGetProps) =>
-  useGet<UserRead, HTTPValidationError, void, ShowUsersIdGetPathParams>(
-    (paramsInPath: ShowUsersIdGetPathParams) => `/users/${paramsInPath.id}`,
-    { pathParams: { id }, ...props }
+export const useRouteUsersDelete = (props: UseRouteUsersDeleteProps) =>
+  useMutate<UserRead[], unknown, void, void, void>("DELETE", `/users`, {
+    ...props,
+  });
+
+export interface RouteUsersItemIdGetPathParams {
+  item_id: number;
+}
+
+export type RouteUsersItemIdGetProps = Omit<
+  GetProps<UserRead, HTTPValidationError, void, RouteUsersItemIdGetPathParams>,
+  "path"
+> &
+  RouteUsersItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const RouteUsersItemIdGet = ({
+  item_id,
+  ...props
+}: RouteUsersItemIdGetProps) => (
+  <Get<UserRead, HTTPValidationError, void, RouteUsersItemIdGetPathParams>
+    path={`/users/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteUsersItemIdGetProps = Omit<
+  UseGetProps<
+    UserRead,
+    HTTPValidationError,
+    void,
+    RouteUsersItemIdGetPathParams
+  >,
+  "path"
+> &
+  RouteUsersItemIdGetPathParams;
+
+/**
+ * Get One
+ */
+export const useRouteUsersItemIdGet = ({
+  item_id,
+  ...props
+}: UseRouteUsersItemIdGetProps) =>
+  useGet<UserRead, HTTPValidationError, void, RouteUsersItemIdGetPathParams>(
+    (paramsInPath: RouteUsersItemIdGetPathParams) =>
+      `/users/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export interface RouteUsersItemIdPutPathParams {
+  item_id: number;
+}
+
+export type RouteUsersItemIdPutProps = Omit<
+  MutateProps<
+    UserRead,
+    HTTPValidationError,
+    void,
+    UserReadUpdate,
+    RouteUsersItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteUsersItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const RouteUsersItemIdPut = ({
+  item_id,
+  ...props
+}: RouteUsersItemIdPutProps) => (
+  <Mutate<
+    UserRead,
+    HTTPValidationError,
+    void,
+    UserReadUpdate,
+    RouteUsersItemIdPutPathParams
+  >
+    verb="PUT"
+    path={`/users/${item_id}`}
+    {...props}
+  />
+);
+
+export type UseRouteUsersItemIdPutProps = Omit<
+  UseMutateProps<
+    UserRead,
+    HTTPValidationError,
+    void,
+    UserReadUpdate,
+    RouteUsersItemIdPutPathParams
+  >,
+  "path" | "verb"
+> &
+  RouteUsersItemIdPutPathParams;
+
+/**
+ * Update One
+ */
+export const useRouteUsersItemIdPut = ({
+  item_id,
+  ...props
+}: UseRouteUsersItemIdPutProps) =>
+  useMutate<
+    UserRead,
+    HTTPValidationError,
+    void,
+    UserReadUpdate,
+    RouteUsersItemIdPutPathParams
+  >(
+    "PUT",
+    (paramsInPath: RouteUsersItemIdPutPathParams) =>
+      `/users/${paramsInPath.item_id}`,
+    { pathParams: { item_id }, ...props }
+  );
+
+export type RouteUsersItemIdDeleteProps = Omit<
+  MutateProps<UserRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const RouteUsersItemIdDelete = (props: RouteUsersItemIdDeleteProps) => (
+  <Mutate<UserRead, HTTPValidationError, void, number, void>
+    verb="DELETE"
+    path={`/users`}
+    {...props}
+  />
+);
+
+export type UseRouteUsersItemIdDeleteProps = Omit<
+  UseMutateProps<UserRead, HTTPValidationError, void, number, void>,
+  "path" | "verb"
+>;
+
+/**
+ * Delete One
+ */
+export const useRouteUsersItemIdDelete = (
+  props: UseRouteUsersItemIdDeleteProps
+) =>
+  useMutate<UserRead, HTTPValidationError, void, number, void>(
+    "DELETE",
+    `/users`,
+    { ...props }
   );
 
 export interface RouteAttendeesGetQueryParams {

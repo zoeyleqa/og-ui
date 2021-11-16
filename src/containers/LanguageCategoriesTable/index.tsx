@@ -38,7 +38,7 @@ const actionButtons = (deleteRow: (rowIndex: number) => void) => ({
   sortable: false
 });
 
-const LanguageCategoriesDataTable = () => {
+const LanguageCategoryDataTable = () => {
   const {
     data: languageCategoryOriginalData,
     loading
@@ -105,12 +105,12 @@ const LanguageCategoriesDataTable = () => {
   );
 };
 
-const LanguageCategoriesTable = ({ baseUrl }: { baseUrl: string }) => {
+const LanguageCategoryTable = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <RestfulProvider base={baseUrl}>
-      <LanguageCategoriesDataTable />
+      <LanguageCategoryDataTable />
     </RestfulProvider>
   );
 };
 
-export { LanguageCategoriesTable };
+export { LanguageCategoryTable };

@@ -1,5 +1,5 @@
 import React, { ReactComponentElement, useMemo } from "react";
-import {  useGlobalFilter, useTable, useSortBy } from "react-table";
+import { useGlobalFilter, useTable, useSortBy } from "react-table";
 import { Row, Col } from "react-bootstrap";
 import { TableFilter } from "../../components/TableFilter/TableFilter";
 import { IconAwesome } from "../../components/Icons/IconAwesome";

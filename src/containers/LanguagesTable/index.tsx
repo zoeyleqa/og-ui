@@ -38,7 +38,7 @@ const actionButtons = (deleteRow: (rowIndex: number) => void) => ({
   sortable: false
 });
 
-const LanguagesDataTable = () => {
+const LanguageDataTable = () => {
   const { data: languageOriginalData, loading } = useRouteLanguagesGet({});
 
   const [languageData, setLanguageData] = useState<any[] | null>(null);
@@ -77,7 +77,7 @@ const LanguagesDataTable = () => {
 
   return !loading && languageData ? (
     <BaseTable
-      id="languagesTable"
+      id="languageTable"
       data={languageData}
       header={header}
       updateMyData={() => {}}
@@ -94,12 +94,12 @@ const LanguagesDataTable = () => {
   );
 };
 
-const LanguagesTable = ({ baseUrl }: { baseUrl: string }) => {
+const LanguageTable = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <RestfulProvider base={baseUrl}>
-      <LanguagesDataTable />
+      <LanguageDataTable />
     </RestfulProvider>
   );
 };
 
-export { LanguagesTable };
+export { LanguageTable };

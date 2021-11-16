@@ -1,1 +1,0 @@
-export { LanguageCategoriesTable } from "./LanguageCategoriesTable";

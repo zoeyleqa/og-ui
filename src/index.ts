@@ -1,4 +1,5 @@
 import { Button } from "./components/Button";
 import { TestButton } from "./components/TestButton";
-import { RolesTable } from "./containers/RolesTable";
-export { Button, TestButton, RolesTable };
+import { RoleTable } from "./containers/RoleTable";
+
+export { Button, TestButton, RoleTable };

@@ -84,7 +84,7 @@ const actionButtons = (
   sortable: false
 });
 
-const AttendeesDataTable = () => {
+const AttendeeDataTable = () => {
   const { data: attendeeOriginalData, loading } = useRouteAttendeesGet({});
 
   const [attendeeData, setAttendeeData] = useState<any[] | null>(null);
@@ -163,12 +163,12 @@ const AttendeesDataTable = () => {
   );
 };
 
-const AttendeesTable = ({ baseUrl }: { baseUrl: string }) => {
+const AttendeeTable = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <RestfulProvider base={baseUrl}>
-      <AttendeesDataTable />
+      <AttendeeDataTable />
     </RestfulProvider>
   );
 };
 
-export { AttendeesTable };
+export { AttendeeTable };

@@ -69,7 +69,7 @@ const actionButtons = (deleteRow: (rowIndex: number) => void) => ({
   sortable: false
 });
 
-const EventsDataTable = () => {
+const EventDataTable = () => {
   const { data: eventOriginalData, loading } = useRouteEventsGet({});
 
   const [eventData, setEventData] = useState<any[] | null>(null);
@@ -122,12 +122,12 @@ const EventsDataTable = () => {
   );
 };
 
-const EventsTable = ({ baseUrl }: { baseUrl: string }) => {
+const EventTable = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <RestfulProvider base={baseUrl}>
-      <EventsDataTable />
+      <EventDataTable />
     </RestfulProvider>
   );
 };
 
-export { EventsTable };
+export { EventTable };

@@ -47,7 +47,7 @@ const actionButtons = (
   sortable: false
 });
 
-const RolesDataTable = () => {
+const RoleDataTable = () => {
   const { data: roleOriginalData, loading } = useRouteRolesGet({});
 
   const [roleData, setRoleData] = useState<any[] | null>(null);
@@ -119,12 +119,12 @@ const RolesDataTable = () => {
   );
 };
 
-const RolesTable = ({ baseUrl }: { baseUrl: string }) => {
+const RoleTable = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <RestfulProvider base={baseUrl}>
-      <RolesDataTable />
+      <RoleDataTable />
     </RestfulProvider>
   );
 };
 
-export { RolesTable };
+export { RoleTable };

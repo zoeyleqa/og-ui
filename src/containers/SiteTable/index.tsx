@@ -73,7 +73,7 @@ const actionButtons = (deleteRow: (rowIndex: number) => void) => ({
   sortable: false
 });
 
-const SitesDataTable = () => {
+const SiteDataTable = () => {
   const { data: siteOriginalData, loading } = useRouteSitesGet({});
 
   const [siteData, setSiteData] = useState<any[] | null>(null);
@@ -126,12 +126,12 @@ const SitesDataTable = () => {
   );
 };
 
-const SitesTable = ({ baseUrl }: { baseUrl: string }) => {
+const SiteTable = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <RestfulProvider base={baseUrl}>
-      <SitesDataTable />
+      <SiteDataTable />
     </RestfulProvider>
   );
 };
 
-export { SitesTable };
+export { SiteTable };

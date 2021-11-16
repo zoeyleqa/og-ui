@@ -1,1 +1,0 @@
-export { GroupsTable } from "./GroupsTable";
