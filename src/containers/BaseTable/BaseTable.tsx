@@ -1,5 +1,11 @@
 import React, { ReactComponentElement, useMemo } from "react";
-import { useGlobalFilter, useTable, useSortBy } from "react-table";
+import {
+  useGlobalFilter,
+  useTable,
+  useSortBy,
+  useGroupBy,
+  useExpanded
+} from "react-table";
 import { Row, Col } from "react-bootstrap";
 import { TableFilter } from "../../components/TableFilter/TableFilter";
 import { IconAwesome } from "../../components/Icons/IconAwesome";
@@ -31,7 +37,8 @@ const BaseTable = ({
     prepareRow,
     state,
     preGlobalFilteredRows,
-    setGlobalFilter
+    setGlobalFilter,
+    state: { groupBy, expanded },
   } = useTable(
     {
       columns,
@@ -48,7 +55,9 @@ const BaseTable = ({
       autoResetSelectedRows: !skipReset
     },
     useGlobalFilter,
-    useSortBy
+    useGroupBy,
+    useSortBy,
+    useExpanded
   );
 
   return (
@@ -65,7 +74,7 @@ const BaseTable = ({
           {toolComponent}
         </Col>
       </Row>
-      <table {...getTableProps()} id={id}>
+      <table {...getTableProps()} id={id} className="base-table">
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>

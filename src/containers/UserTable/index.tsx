@@ -13,6 +13,28 @@ import {
 import { concatData } from "./helpers";
 import { IconAwesome } from "../../components/Icons/IconAwesome";
 
+const AccessRightsCell = ({ row }: { row: { values: any } }) => {
+  return !row || !row.values || !row.values["user_access_rights"] ? (
+    <span>N/A</span>
+  ) : (
+    <table className="tag-table">
+      <tbody>
+      {row.values["user_access_rights"].map(
+        (e: {
+          tag: String | null | undefined;
+          access_rights: String | null | undefined;
+        }) => (
+          <tr>
+            <td className="tag-table__tag">{e.tag}</td>
+            <td className="tag-table__access">{e.access_rights}</td>
+          </tr>
+        )
+      )}
+      </tbody>
+    </table>
+  );
+};
+
 const attendeeTableHeader = [
   {
     Header: "First Name",
@@ -48,15 +70,13 @@ const attendeeTableHeader = [
     Cell: ({ row }: { row: { values: any } }) => {
       return <span>{concatData(row, "user_exercises")}</span>;
     }
+  },
+  {
+    Header: "Access Rights",
+    accessor: "user_access_rights",
+    disableSortBy: true,
+    Cell: AccessRightsCell 
   }
-  // {
-  //   Header: "Language Category",
-  //   accessor: "lang_cats",
-  //   disableSortBy: true,
-  //   Cell: ({ row }: { row: { values: any } }) => {
-  //     return <span>{concatData(row, "lang_cats")}</span>;
-  //   }
-  // }
 ];
 
 const actionButtons = (

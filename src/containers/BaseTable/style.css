@@ -1,6 +1,6 @@
 @import "../../main.css";
 
-table {
+table.base-table {
   border-collapse: collapse;
   width: 100%;
   background-color: #fff;
@@ -9,23 +9,34 @@ table {
   overflow: hidden;
 }
 
-th,
-td {
+.base-table th, td {
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
+.base-table tr:nth-child(even) {
   background-color: var(--neutral-5);
 }
 
-thead {
+.base-table thead {
   background-color: var(--neutral-4);
   color: var(--neutral-2);
   padding: 0.75rem 1rem;
 }
 
-tr td:last-child {
+.base-table tr td:last-child {
   width: 1%;
   white-space: nowrap;
+}
+
+.tag-table tr:nth-child(even) {
+  background-color: transparent;
+}
+
+.tag-table__tag {
+  text-transform: uppercase;
+}
+
+.tag-table__access {
+  min-width: 45px;
 }
