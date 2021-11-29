@@ -41,12 +41,7 @@ export const AddLanguageCategoryButton = ({
 
     const name = form.langCategoriesName ? form.langCategoriesName.value : "";
     const description = form.description ? String(form.description.value) : "";
-    const pay = form.pay ? String(form.pay.value) : "";
-    const args = {
-      name,
-      description,
-      pay
-    };
+    const args = { name, description };
 
     add({ ...args })
       .then((retData: { id: any }) => {
@@ -99,15 +94,7 @@ export const AddLanguageCategoryButton = ({
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="pay">
-              <Form.Label column sm="2">
-                Daily Pay (&#x24;USD)
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control required placeholder="Enter Pay" />
-              </Col>
-            </Form.Group>
-            <Button
+w            <Button
               type="save"
               label="Submit"
               onClick={() => addLanguageCategory()}

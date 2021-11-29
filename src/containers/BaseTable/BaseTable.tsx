@@ -70,7 +70,7 @@ const BaseTable = ({
             setGlobalFilter={setGlobalFilter}
           />
         </Col>
-        <Col xs={6} className="text-right">
+        <Col xs={6} className="content-float-right">
           {toolComponent}
         </Col>
       </Row>

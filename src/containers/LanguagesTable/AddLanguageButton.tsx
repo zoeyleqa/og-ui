@@ -37,13 +37,8 @@ export const AddLanguageButton = ({ addHandler, addRow }: AddLanguageProps) => {
     const form = document.getElementById(formId) as HTMLFormElement;
 
     const name = form.languagename ? form.languagename.value : "";
-    const description = form.description ? String(form.description.value) : "";
-    const pay = form.pay ? String(form.pay.value) : "";
-    const args = {
-      name,
-      description,
-      pay
-    };
+    const comment = form.comment ? String(form.comment.value) : "";
+    const args = { name, comment };
 
     add({ ...args })
       .then((retData: { id: any }) => {
@@ -78,28 +73,20 @@ export const AddLanguageButton = ({ addHandler, addRow }: AddLanguageProps) => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="description">
+            <Form.Group as={Row} className="mb-3" controlId="comment">
               <Form.Label column sm="2">
-                Description
+                Comment
               </Form.Label>
               <Col sm="10">
                 <Form.Control
                   required
                   as="textarea"
-                  placeholder="Add description here"
+                  placeholder="Add comment here"
                   style={{ height: "100px" }}
                 />
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="pay">
-              <Form.Label column sm="2">
-                Daily Pay (&#x24;USD)
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control required placeholder="Enter Pay" />
-              </Col>
-            </Form.Group>
             <Button
               type="save"
               label="Submit"
