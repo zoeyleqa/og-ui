@@ -70,36 +70,90 @@ export const AddEventButton = ({ addHandler, addRow }: AddEventProps) => {
         content={
           <Form id={formId}>
             <Form.Group as={Row} className="mb-3" controlId="eventname">
-              <Form.Label column sm="2">
+              <Form.Label column sm="4">
                 Event Name
               </Form.Label>
-              <Col sm="10">
+              <Col sm="8">
                 <Form.Control required placeholder="Enter Event" />
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="description">
-              <Form.Label column sm="2">
-                Description
+            <Form.Group as={Row} className="mb-3" controlId="openDate">
+              <Form.Label column sm="4">
+                Open Date
               </Form.Label>
-              <Col sm="10">
+              <Col sm="8">
                 <Form.Control
+                  type="date"
                   required
-                  as="textarea"
-                  placeholder="Add description here"
-                  style={{ height: "100px" }}
+                  placeholder="Enter date here"
                 />
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="pay">
-              <Form.Label column sm="2">
-                Daily Pay (&#x24;USD)
+            <Form.Group as={Row} className="mb-3" controlId="infilSuspenseDate">
+              <Form.Label column sm="4">
+                Infil Suspense Date
               </Form.Label>
-              <Col sm="10">
-                <Form.Control required placeholder="Enter Pay" />
+              <Col sm="8">
+                <Form.Control required placeholder="Enter date" />
               </Col>
             </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="poSuspenseDate">
+              <Form.Label column sm="4">
+                PO Suspense Date
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control required placeholder="Enter date" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="finalSuspenseDate">
+              <Form.Label column sm="4">
+                Final Suspense Date
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control required placeholder="Enter date" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="startDate">
+              <Form.Label column sm="4">
+                Start Date
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control required placeholder="Enter date" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="endDate">
+              <Form.Label column sm="4">
+                End Date
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control required placeholder="Enter date" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="exfilSuspenseDate">
+              <Form.Label column sm="4">
+                Exfil Suspense Date
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control required placeholder="Enter date" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="overrideDates">
+              <Form.Label column sm="4">
+                Override Dates
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control required placeholder="Enter date" />
+              </Col>
+            </Form.Group>
+
             <Button
               type="save"
               label="Submit"

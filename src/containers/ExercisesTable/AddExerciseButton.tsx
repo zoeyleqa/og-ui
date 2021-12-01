@@ -10,9 +10,14 @@ const drawerId = "add-exercise";
 interface AddExerciseProps {
   addHandler: any;
   addRow: any;
+  groups: Array<any> | null;
 }
 
-export const AddExerciseButton = ({ addHandler, addRow }: AddExerciseProps) => {
+export const AddExerciseButton = ({
+  addHandler,
+  addRow,
+  groups
+}: AddExerciseProps) => {
   const { mutate: add, loading } = addHandler({});
 
   const offcanvasEl = useRef<HTMLElement | null>(null);
@@ -38,11 +43,17 @@ export const AddExerciseButton = ({ addHandler, addRow }: AddExerciseProps) => {
 
     const name = form.exercisename ? form.exercisename.value : "";
     const description = form.description ? String(form.description.value) : "";
-    const pay = form.pay ? String(form.pay.value) : "";
+    const backgroundColor = form.backgroundColor
+      ? String(form.backgroundColor.value)
+      : "";
+    const textColor = form.textColor ? String(form.textColor.value) : "";
+    const groupId = form.group ? parseInt(form.group.value) : null;
     const args = {
       name,
       description,
-      pay
+      backgroundColor,
+      textColor,
+      groupId
     };
 
     add({ ...args })
@@ -84,7 +95,6 @@ export const AddExerciseButton = ({ addHandler, addRow }: AddExerciseProps) => {
               </Form.Label>
               <Col sm="10">
                 <Form.Control
-                  required
                   as="textarea"
                   placeholder="Add description here"
                   style={{ height: "100px" }}
@@ -92,14 +102,40 @@ export const AddExerciseButton = ({ addHandler, addRow }: AddExerciseProps) => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="pay">
+            <Form.Group as={Row} className="mb-3" controlId="backgroundColor">
               <Form.Label column sm="2">
-                Daily Pay (&#x24;USD)
+                Background Color
               </Form.Label>
               <Col sm="10">
-                <Form.Control required placeholder="Enter Pay" />
+                <Form.Control required placeholder="Enter Color" />
               </Col>
             </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="textColor">
+              <Form.Label column sm="2">
+                Text Color
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required placeholder="Enter Color" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group controlId="group">
+              <Form.Label>Custom select</Form.Label>
+              <Form.Control as="select" custom required>
+                {groups
+                  ? groups.map((group: any) => (
+                      <option
+                        key={`exercise-group-${group.id}`}
+                        value={group.id}
+                      >
+                        {group.name}
+                      </option>
+                    ))
+                  : null}
+              </Form.Control>
+            </Form.Group>
+
             <Row className="button-group-right">
               <Button type="cancel" onClick={toggleAddPanel} />
               <Button

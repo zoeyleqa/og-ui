@@ -94,7 +94,7 @@ export const AddLanguageCategoryButton = ({
               </Col>
             </Form.Group>
 
-w            <Button
+            <Button
               type="save"
               label="Submit"
               onClick={() => addLanguageCategory()}

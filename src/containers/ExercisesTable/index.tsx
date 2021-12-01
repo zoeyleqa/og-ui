@@ -7,7 +7,8 @@ import { RestfulProvider } from "restful-react";
 import {
   useRouteExercisesGet,
   useRouteExercisesPost,
-  useRouteExercisesItemIdDelete
+  useRouteExercisesItemIdDelete,
+  useRouteGroupsGet
 } from "../../action/actions";
 
 const exerciseTableHeader = [
@@ -50,17 +51,21 @@ const actionButtons = (deleteRow: (rowIndex: number) => void) => ({
 });
 
 const ExerciseDataTable = () => {
-  const { data: exerciseOriginalData, loading } = useRouteExercisesGet({});
+  const {
+    data: exerciseOriginalData,
+    loading: exerciseLoading
+  } = useRouteExercisesGet({});
+  const { data: groupData, loading: groupLoading } = useRouteGroupsGet({});
 
   const [exerciseData, setExerciseData] = useState<any[] | null>(null);
   const [header, setHeader] = useState<any[]>(exerciseTableHeader);
 
   useEffect(() => {
-    if (!loading) {
+    if (!exerciseLoading) {
       setExerciseData(exerciseOriginalData);
       setHeader(exerciseTableHeader.concat(actionButtons(deleteExercise)));
     }
-  }, [loading]);
+  }, [exerciseLoading]);
 
   useEffect(() => {
     skipResetRef.current = false;
@@ -86,7 +91,7 @@ const ExerciseDataTable = () => {
     setExerciseData((old: any[] | null) => (!old ? [row] : [...old, row]));
   };
 
-  return !loading && exerciseData ? (
+  return !exerciseLoading && exerciseData ? (
     <BaseTable
       id="exercisesTable"
       data={exerciseData}
@@ -94,7 +99,11 @@ const ExerciseDataTable = () => {
       updateMyData={() => {}}
       skipReset={skipResetRef}
       toolComponent={
-        <AddExerciseButton addHandler={useRouteExercisesPost} addRow={addExercise} />
+        <AddExerciseButton
+          addHandler={useRouteExercisesPost}
+          addRow={addExercise}
+          groups={groupData}
+        />
       }
     />
   ) : (

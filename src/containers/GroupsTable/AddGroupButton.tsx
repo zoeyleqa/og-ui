@@ -37,12 +37,14 @@ export const AddGroupButton = ({ addHandler, addRow }: AddGroupProps) => {
     const form = document.getElementById(formId) as HTMLFormElement;
 
     const name = form.groupname ? form.groupname.value : "";
-    const description = form.description ? String(form.description.value) : "";
-    const pay = form.pay ? String(form.pay.value) : "";
+    const unit = form.unit ? String(form.unit.value) : "";
+    const lead_one = form.lead1 ? String(form.lead1.value) : "";
+    const lead_two = form.lead2 ? String(form.lead2.value) : "";
     const args = {
       name,
-      description,
-      pay
+      unit,
+      lead_one,
+      lead_two
     };
 
     add({ ...args })
@@ -78,28 +80,36 @@ export const AddGroupButton = ({ addHandler, addRow }: AddGroupProps) => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="description">
+            <Form.Group as={Row} className="mb-3" controlId="unit">
               <Form.Label column sm="2">
-                Description
+                Unit
               </Form.Label>
               <Col sm="10">
                 <Form.Control
                   required
-                  as="textarea"
-                  placeholder="Add description here"
-                  style={{ height: "100px" }}
+                  placeholder="Enter Unit"
                 />
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="pay">
+            <Form.Group as={Row} className="mb-3" controlId="lead1">
               <Form.Label column sm="2">
-                Daily Pay (&#x24;USD)
+                Lead 1
               </Form.Label>
               <Col sm="10">
-                <Form.Control required placeholder="Enter Pay" />
+                <Form.Control required placeholder="Enter Lead" />
               </Col>
             </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="lead2">
+              <Form.Label column sm="2">
+                Lead 2
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required placeholder="Enter Lead" />
+              </Col>
+            </Form.Group>
+
             <Button
               type="save"
               label="Submit"
