@@ -69,37 +69,123 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
         title="Add New Attendee"
         content={
           <Form id={formId}>
-            <Form.Group as={Row} className="mb-3" controlId="attendeename">
+            <Form.Group as={Row} className="mb-3" controlId="firstname">
               <Form.Label column sm="2">
-                Attendee Name
+                First Name
               </Form.Label>
               <Col sm="10">
-                <Form.Control required placeholder="Enter Attendee" />
+                <Form.Control required placeholder="Enter name" />
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="description">
+            <Form.Group as={Row} className="mb-3" controlId="middlename">
               <Form.Label column sm="2">
-                Description
+                Middle Name
               </Form.Label>
               <Col sm="10">
-                <Form.Control
-                  required
-                  as="textarea"
-                  placeholder="Add description here"
-                  style={{ height: "100px" }}
-                />
+                <Form.Control required placeholder="Enter name" />
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="pay">
+            <Form.Group as={Row} className="mb-3" controlId="lastname">
               <Form.Label column sm="2">
-                Daily Pay (&#x24;USD)
+                Last Name
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required placeholder="Enter name" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="preferredname">
+              <Form.Label column sm="2">
+                Preferred Name
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required placeholder="Enter name" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="suffix">
+              <Form.Label column sm="2">
+                Suffix
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="gender">
+              <Form.Label column sm="2">
+                Gender
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="email">
+              <Form.Label column sm="2">
+                Email
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="address">
+              <Form.Label column sm="2">
+                Address
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="city">
+              <Form.Label column sm="2">
+                City
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required placeholder="Enter city" />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="state">
+              <Form.Label column sm="2">
+                State
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="country">
+              <Form.Label column sm="2">
+                Country
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="status">
+              <Form.Label column sm="2">
+                Status
               </Form.Label>
               <Col sm="10">
                 <Form.Control required placeholder="Enter Pay" />
               </Col>
             </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="usCitizen">
+              <Col sm="8">
+                <Form.Check 
+                  type="checkbox"
+                  label="Is US citizen"
+                />
+              </Col>
+            </Form.Group>
+
             <Button
               type="save"
               label="Submit"

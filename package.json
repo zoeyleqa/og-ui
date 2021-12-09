@@ -17,9 +17,11 @@
     "@storybook/react": "^6.3.8",
     "@types/bootstrap": "^5.1.6",
     "@types/react": "^17.0.21",
+    "@types/react-datepicker": "^4.3.2",
     "@types/react-table": "^7.7.3",
     "babel-loader": "^8.2.2",
     "bootstrap": "^5.1.3",
+    "dayjs": "^1.10.7",
     "jquery": "^3.6.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.6",
@@ -63,5 +65,8 @@
     "react",
     "javascript",
     "typescript"
-  ]
+  ],
+  "dependencies": {
+    "react-datepicker": "^4.4.0"
+  }
 }
