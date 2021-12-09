@@ -89,6 +89,26 @@ export const AddExerciseButton = ({
               </Col>
             </Form.Group>
 
+            <Form.Group as={Row} className="mb-3" controlId="group">
+              <Form.Label column sm="2">
+                Group
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control as="select" required>
+                  {groups
+                    ? groups.map((group: any) => (
+                        <option
+                          key={`exercise-group-${group.id}`}
+                          value={group.id}
+                        >
+                          {group.name}
+                        </option>
+                      ))
+                    : null}
+                </Form.Control>
+              </Col>
+            </Form.Group>
+
             <Form.Group as={Row} className="mb-3" controlId="description">
               <Form.Label column sm="2">
                 Description
@@ -118,22 +138,6 @@ export const AddExerciseButton = ({
               <Col sm="10">
                 <Form.Control required placeholder="Enter Color" />
               </Col>
-            </Form.Group>
-
-            <Form.Group controlId="group">
-              <Form.Label>Custom select</Form.Label>
-              <Form.Control as="select" custom required>
-                {groups
-                  ? groups.map((group: any) => (
-                      <option
-                        key={`exercise-group-${group.id}`}
-                        value={group.id}
-                      >
-                        {group.name}
-                      </option>
-                    ))
-                  : null}
-              </Form.Control>
             </Form.Group>
 
             <Row className="button-group-right">

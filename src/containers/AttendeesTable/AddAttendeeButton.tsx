@@ -36,13 +36,31 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
   const addAttendee = () => {
     const form = document.getElementById(formId) as HTMLFormElement;
 
-    const name = form.attendeename ? form.attendeename.value : "";
-    const description = form.description ? String(form.description.value) : "";
-    const pay = form.pay ? String(form.pay.value) : "";
+    const first_name = form.firstName ? form.firstName.value : "";
+    const middle_name = form.middleName ? form.middleName.value : "";
+    const last_name = form.lastName ? form.lastName.value : "";
+    const nick_name = form.preferredName ? form.preferredName.value : "";
+    const suffix = form.suffix ? form.suffix.value : "";
+    const sex = form.gender ? form.gender.value : "";
+    const email = form.email ? form.email.value : "";
+    const street = form.address ? form.address.value : "";
+    const city = form.city ? form.city.value : "";
+    const state = form.state ? form.state.value : "";
+    const country_code = form.country ? form.country.value : "";
+    const is_us_citizen = form.usCitizen ? form.usCitizen.value : "";
     const args = {
-      name,
-      description,
-      pay
+      first_name,
+      middle_name,
+      last_name,
+      nick_name,
+      suffix,
+      sex,
+      email,
+      street,
+      city,
+      state,
+      country_code,
+      is_us_citizen
     };
 
     add({ ...args })
@@ -69,7 +87,7 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
         title="Add New Attendee"
         content={
           <Form id={formId}>
-            <Form.Group as={Row} className="mb-3" controlId="firstname">
+            <Form.Group as={Row} className="mb-3" controlId="firstName">
               <Form.Label column sm="2">
                 First Name
               </Form.Label>
@@ -78,7 +96,7 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="middlename">
+            <Form.Group as={Row} className="mb-3" controlId="middleName">
               <Form.Label column sm="2">
                 Middle Name
               </Form.Label>
@@ -87,18 +105,9 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="lastname">
+            <Form.Group as={Row} className="mb-3" controlId="lastName">
               <Form.Label column sm="2">
                 Last Name
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control required placeholder="Enter name" />
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3" controlId="preferredname">
-              <Form.Label column sm="2">
-                Preferred Name
               </Form.Label>
               <Col sm="10">
                 <Form.Control required placeholder="Enter name" />
@@ -111,6 +120,15 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
               </Form.Label>
               <Col sm="10">
                 <Form.Control />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="preferredName">
+              <Form.Label column sm="2">
+                Preferred Name
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control required placeholder="Enter nick name" />
               </Col>
             </Form.Group>
 
@@ -168,21 +186,25 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="status">
+            <Form.Group className="mb-3" controlId="status">
               <Form.Label column sm="2">
                 Status
               </Form.Label>
               <Col sm="10">
-                <Form.Control required placeholder="Enter Pay" />
+                <Form.Control as="select" required>
+                  <option key={`attendee-status-active`} value="active">
+                    Active
+                  </option>
+                  <option key={`attendee-status-inactive`} value="Inactive">
+                    Inactive
+                  </option>
+                </Form.Control>
               </Col>
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3" controlId="usCitizen">
               <Col sm="8">
-                <Form.Check 
-                  type="checkbox"
-                  label="Is US citizen"
-                />
+                <Form.Check type="checkbox" label="Is US citizen" />
               </Col>
             </Form.Group>
 
