@@ -118,6 +118,7 @@ export const AddExerciseButton = ({
                   as="textarea"
                   placeholder="Add description here"
                   style={{ height: "100px" }}
+                  maxLength={64} 
                 />
               </Col>
             </Form.Group>
@@ -127,7 +128,7 @@ export const AddExerciseButton = ({
                 Background Color
               </Form.Label>
               <Col sm="10">
-                <Form.Control required placeholder="Enter Color" />
+                <Form.Control required placeholder="Enter Color" maxLength={8}/>
               </Col>
             </Form.Group>
 
@@ -136,7 +137,7 @@ export const AddExerciseButton = ({
                 Text Color
               </Form.Label>
               <Col sm="10">
-                <Form.Control required placeholder="Enter Color" />
+                <Form.Control required placeholder="Enter Color" maxLength={8} />
               </Col>
             </Form.Group>
 

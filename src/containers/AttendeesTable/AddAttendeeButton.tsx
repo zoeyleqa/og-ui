@@ -47,7 +47,7 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
     const city = form.city ? form.city.value : "";
     const state = form.state ? form.state.value : "";
     const country_code = form.country ? form.country.value : "";
-    const status = form.status? form.status.value : "Inactive";
+    const status = form.status ? form.status.value : "Inactive";
     const is_us_citizen = form.usCitizen ? form.usCitizen.checked : false;
     const args = {
       first_name,
@@ -121,7 +121,7 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
                 Suffix
               </Form.Label>
               <Col sm="10">
-                <Form.Control />
+                <Form.Control maxLength={12} />
               </Col>
             </Form.Group>
 
@@ -134,12 +134,19 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="gender">
+            <Form.Group className="mb-3" controlId="gender">
               <Form.Label column sm="2">
                 Gender
               </Form.Label>
               <Col sm="10">
-                <Form.Control />
+                <Form.Control as="select" required>
+                  <option key={`attendee-sex-m`} value="M">
+                    Male
+                  </option>
+                  <option key={`attendee-sex-f`} value="F">
+                    Female
+                  </option>
+                </Form.Control>
               </Col>
             </Form.Group>
 
@@ -175,7 +182,7 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
                 State
               </Form.Label>
               <Col sm="10">
-                <Form.Control required />
+                <Form.Control maxLength={2} required />
               </Col>
             </Form.Group>
 
