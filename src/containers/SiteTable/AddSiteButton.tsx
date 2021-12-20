@@ -41,36 +41,36 @@ export const AddSiteButton = ({ addHandler, addRow }: AddSiteProps) => {
     const country = form.country ? String(form.country.value) : "";
     const city = form.city ? String(form.city.value) : "";
     const state = form.state ? String(form.state.value) : "";
-    const latDeg = !form.latDeg
+    const latitude = !form.latDeg
       ? null
       : isNaN(Number(form.latDeg.value))
       ? 0
       : Number(form.latDeg.value);
-    const latMin = !form.latMin
+    const latitude_min = !form.latMin
       ? null
       : isNaN(Number(form.latMin.value))
       ? 0
       : Number(form.latMin.value);
-    const latSec = !form.latSec
+    const latitude_sec = !form.latSec
       ? null
       : isNaN(Number(form.latSec.value))
       ? 0
       : Number(form.latSec.value);
-    const longDeg = !form.longDeg
+    const longitude = !form.longDeg
       ? null
       : isNaN(Number(form.longDeg.value))
       ? 0
-      : Number(form.latSec.value);
-    const longMin = !form.longMin
+      : Number(form.longDeg.value);
+    const longitude_min = !form.longMin
       ? null
       : isNaN(Number(form.longMin.value))
       ? 0
-      : Number(form.latSec.value);
-    const longSec = !form.longSec
+      : Number(form.longMin.value);
+    const longitude_sec = !form.longSec
       ? null
       : isNaN(Number(form.longSec.value))
       ? 0
-      : Number(form.latSec.value);
+      : Number(form.longSec.value);
 
     const args = {
       name,
@@ -78,12 +78,12 @@ export const AddSiteButton = ({ addHandler, addRow }: AddSiteProps) => {
       country,
       city,
       state,
-      latDeg,
-      latMin,
-      latSec,
-      longDeg,
-      longMin,
-      longSec
+      latitude,
+      latitude_min,
+      latitude_sec,
+      longitude,
+      longitude_min,
+      longitude_sec
     };
 
     add({ ...args })

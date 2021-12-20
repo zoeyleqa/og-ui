@@ -47,7 +47,8 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
     const city = form.city ? form.city.value : "";
     const state = form.state ? form.state.value : "";
     const country_code = form.country ? form.country.value : "";
-    const is_us_citizen = form.usCitizen ? form.usCitizen.value : "";
+    const status = form.status? form.status.value : "Inactive";
+    const is_us_citizen = form.usCitizen ? form.usCitizen.checked : false;
     const args = {
       first_name,
       middle_name,
@@ -60,6 +61,7 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
       city,
       state,
       country_code,
+      status,
       is_us_citizen
     };
 
@@ -192,7 +194,7 @@ export const AddAttendeeButton = ({ addHandler, addRow }: AddAttendeeProps) => {
               </Form.Label>
               <Col sm="10">
                 <Form.Control as="select" required>
-                  <option key={`attendee-status-active`} value="active">
+                  <option key={`attendee-status-active`} value="Active">
                     Active
                   </option>
                   <option key={`attendee-status-inactive`} value="Inactive">

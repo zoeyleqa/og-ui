@@ -43,17 +43,17 @@ export const AddExerciseButton = ({
 
     const name = form.exercisename ? form.exercisename.value : "";
     const description = form.description ? String(form.description.value) : "";
-    const backgroundColor = form.backgroundColor
+    const background_color = form.backgroundColor
       ? String(form.backgroundColor.value)
       : "";
-    const textColor = form.textColor ? String(form.textColor.value) : "";
-    const groupId = form.group ? parseInt(form.group.value) : null;
+    const text_color = form.textColor ? String(form.textColor.value) : "";
+    const group_id = form.group ? parseInt(form.group.value) : null;
     const args = {
       name,
       description,
-      backgroundColor,
-      textColor,
-      groupId
+      background_color,
+      text_color,
+      group_id
     };
 
     add({ ...args })
