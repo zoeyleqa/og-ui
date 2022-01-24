@@ -3,7 +3,7 @@ import { SiteTable } from ".";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default {
-  title: "Containers/SitesTable",
+  title: "Containers/SiteTable",
   component: SiteTable
 };
 
