@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import Timeline, {
@@ -37,53 +37,32 @@ interface TimetableProps {
 }
 
 interface TimetableState {
-  groups: any;
-  items: any;
+  groupData: any;
+  itemData: any;
   defaultTimeStart: Date;
   defaultTimeEnd: Date;
   draggedItem: any;
-  openGroups: { [index: string | number]: any };
+  expandedGroups: { [index: string | number]: any };
 }
 
-export default class Timetable extends Component<
-  TimetableProps,
-  TimetableState
-> {
-  constructor(props: TimetableProps) {
-    super(props);
+export const Timetable = ({
+  groupData,
+  itemData,
+  resizable,
+  movable,
+  leftColHeader
+}: TimetableProps) => {
+  const [expandedGroups, setExpandedGroups] = useState<Array<number>>([]);
+  const [draggedItem, setDraggedItem] = useState<Object | undefined>(undefined);
+  // this.isWeekendDay = this.isWeekendDay.bind(this);
+  // this.isCurrentDay = this.isCurrentDay.bind(this);
+  // this.itemRenderer = this.itemRenderer.bind(this);
+  // this.intervalRenderer = this.intervalRenderer.bind(this);
+  const { groups, items } = helper.prepareData(groupData, itemData, expandedGroups);
+  const defaultTimeStart = dayjs().startOf("day").add(-7, "day").toDate();
+  const defaultTimeEnd = dayjs().startOf("day").add(7, "day").toDate();
 
-    // const { groups, items } = helper.prepareData(props.groups, props.items);
-    const defaultTimeStart = dayjs().startOf("day").add(-7, "day").toDate();
-    const defaultTimeEnd = dayjs().startOf("day").add(7, "day").toDate();
-    this.isWeekendDay = this.isWeekendDay.bind(this);
-    this.isCurrentDay = this.isCurrentDay.bind(this);
-    this.itemRenderer = this.itemRenderer.bind(this);
-    this.intervalRenderer = this.intervalRenderer.bind(this);
-    // convert every 2 groups out of 3 to nodes, leaving the first as the root
-    // const newGroups = props.groups.map((group: { id: string }) => {
-    //   const isRoot = (parseInt(group.id) - 1) % 3 === 0;
-    //   const parent = isRoot
-    //     ? null
-    //     : Math.floor((parseInt(group.id) - 1) / 3) * 3 + 1;
-
-    //   return Object.assign({}, group, {
-    //     root: isRoot,
-    //     parent: parent
-    //   });
-    // });
-
-    this.state = {
-      // groups: newGroups,
-      groups: props.groups,
-      items: props.items,
-      defaultTimeStart,
-      defaultTimeEnd,
-      draggedItem: undefined,
-      openGroups: {}
-    };
-  }
-
-  itemRenderer = ({
+  const itemRenderer = ({
     item,
     itemContext,
     getItemProps,
@@ -138,17 +117,11 @@ export default class Timetable extends Component<
     );
   };
 
-  toggleGroup = (id: number) => {
-    const { openGroups } = this.state;
-    this.setState({
-      openGroups: {
-        ...openGroups,
-        [id]: !openGroups[id]
-      }
-    });
+  const toggleGroup = (id: number) => {
+    setExpandedGroups([...expandedGroups, id]);
   };
 
-  handleItemMove = (
+  const handleItemMove = (
     itemId: any,
     dragTime: number,
     newGroupOrder: string | number
@@ -173,7 +146,7 @@ export default class Timetable extends Component<
     console.log("Moved", itemId, dragTime, newGroupOrder);
   };
 
-  handleItemResize = (itemId: any, time: any, edge: string) => {
+  const handleItemResize = (itemId: any, time: any, edge: string) => {
     const { items } = this.state;
 
     this.setState({
@@ -191,7 +164,7 @@ export default class Timetable extends Component<
     console.log("Resized", itemId, time, edge);
   };
 
-  handleItemDrag = ({
+  const handleItemDrag = ({
     itemId,
     time,
     newGroupOrder
@@ -209,7 +182,7 @@ export default class Timetable extends Component<
     });
   };
 
-  isWeekendDay = (
+  const isWeekendDay = (
     intervalContext: { interval: { startTime: { day: () => any } } },
     data: { isMonth: any }
   ) => {
@@ -220,7 +193,7 @@ export default class Timetable extends Component<
     return day === 6 || day === 0; // Saturday or Sunday
   };
 
-  isCurrentDay = (
+  const isCurrentDay = (
     intervalContext: {
       interval: { startTime: { isSame: (arg0: any, arg1: string) => any } };
     },
@@ -232,7 +205,7 @@ export default class Timetable extends Component<
     );
   };
 
-  intervalRenderer = ({
+  const intervalRenderer = ({
     intervalContext,
     getIntervalProps,
     data,
@@ -273,67 +246,58 @@ export default class Timetable extends Component<
     );
   };
 
-  render() {
-    const {
-      groups,
-      items,
-      defaultTimeStart,
-      defaultTimeEnd,
-      openGroups
-    } = this.state;
+  // hide (filter) the groups that are closed, for the rest, patch their "title" and add some callbacks or padding
+  // const newGroups = groups
+  //   .filter(
+  //     (g: { root: any; parent: string | number }) =>
+  //       g.root || expandedGroups[g.parent]
+  //   )
+  //   .map((group: { root: any; id: string; title: {} | null | undefined }) => {
+  //     return Object.assign({}, group, {
+  //       title: group.root ? (
+  //         <div
+  //           onClick={() => this.toggleGroup(parseInt(group.id))}
+  //           style={{ cursor: "pointer" }}
+  //         >
+  //           {expandedGroups[parseInt(group.id)] ? "[-]" : "[+]"} {group.title}
+  //         </div>
+  //       ) : (
+  //         <div style={{ paddingLeft: 20 }}>{group.title}</div>
+  //       )
+  //     });
+  //   });
 
-    // hide (filter) the groups that are closed, for the rest, patch their "title" and add some callbacks or padding
-    // const newGroups = groups
-    //   .filter(
-    //     (g: { root: any; parent: string | number }) =>
-    //       g.root || openGroups[g.parent]
-    //   )
-    //   .map((group: { root: any; id: string; title: {} | null | undefined }) => {
-    //     return Object.assign({}, group, {
-    //       title: group.root ? (
-    //         <div
-    //           onClick={() => this.toggleGroup(parseInt(group.id))}
-    //           style={{ cursor: "pointer" }}
-    //         >
-    //           {openGroups[parseInt(group.id)] ? "[-]" : "[+]"} {group.title}
-    //         </div>
-    //       ) : (
-    //         <div style={{ paddingLeft: 20 }}>{group.title}</div>
-    //       )
-    //     });
-    //   });
-
-    return (
-      <>
-        <Timeline
-          // groups={newGroups}
-          groups={groups}
-          items={items}
-          keys={keys}
-          sidebarContent={<div>Above The Left</div>}
-          sidebarWidth={150}
-          // itemsSorted={true}
-          itemTouchSendsClick={false}
-          stackItems
-          itemHeightRatio={0.75}
-          // showCursorLine
-          canMove={this.props.movable}
-          canResize={this.props.resizable}
-          // canMove
-          // canResize="right"
-          // canSelect
-          dragSnap={dayjs.duration(1, "days").milliseconds()}
-          maxZoom={dayjs.duration(2, "months").milliseconds()}
-          minZoom={dayjs.duration(3, "days").milliseconds()}
-          defaultTimeStart={defaultTimeStart}
-          defaultTimeEnd={defaultTimeEnd}
-          itemRenderer={this.itemRenderer}
-          onItemMove={this.handleItemMove}
-          onItemResize={this.handleItemResize}
-        >
-          <TimelineMarkers>
-            <TodayMarker date={dayjs().toDate()} />
-            {/* <TodayMarker>
+  return (
+    <>
+      <Timeline
+        // groups={newGroups}
+        groups={groups}
+        items={items}
+        keys={keys}
+        sidebarContent={<div>Above The Left</div>}
+        sidebarWidth={150}
+        // itemsSorted={true}
+        itemTouchSendsClick={false}
+        stackItems
+        itemHeightRatio={0.75}
+        // showCursorLine
+        canMove={movable}
+        canResize={resizable}
+        // canMove
+        // canResize="right"
+        // canSelect
+        dragSnap={dayjs.duration(1, "days").milliseconds()}
+        maxZoom={dayjs.duration(2, "months").milliseconds()}
+        minZoom={dayjs.duration(3, "days").milliseconds()}
+        defaultTimeStart={defaultTimeStart}
+        defaultTimeEnd={defaultTimeEnd}
+        itemRenderer={itemRenderer}
+        onItemMove={handleItemMove}
+        onItemResize={handleItemResize}
+      >
+        <TimelineMarkers>
+          <TodayMarker date={dayjs().toDate()} />
+          {/* <TodayMarker>
               {({ styles, date } : {styles: object; date: number;}) => (
                 // date is value of current date. Use this to render special styles for the marker
                 // or any other custom logic based on date:
@@ -341,37 +305,34 @@ export default class Timetable extends Component<
                 <div style={backgroundColor: isDateInAfternoon(date) ? 'red' : 'limegreen'} />
               )}
             </TodayMarker> */}
-          </TimelineMarkers>
-          <TimelineHeaders className="sticky">
-            <SidebarHeader>
-              {({ getRootProps }) => {
-                return (
-                  <div {...getRootProps()}>{this.props.leftColHeader}</div>
-                );
-              }}
-            </SidebarHeader>
-            <DateHeader
-              unit="month"
-              labelFormat="MMMM"
-              headerData={{ isMonth: true }}
-              intervalRenderer={this.intervalRenderer}
-            />
-            <DateHeader
-              unit="day"
-              labelFormat="D"
-              headerData={{ isMonth: false }}
-              intervalRenderer={this.intervalRenderer}
-            />
-          </TimelineHeaders>
-        </Timeline>
-        {this.state.draggedItem && (
-          <InfoLabel
-            item={this.state.draggedItem.item}
-            group={this.state.draggedItem.group}
-            time={this.state.draggedItem.time}
+        </TimelineMarkers>
+        <TimelineHeaders className="sticky">
+          <SidebarHeader>
+            {({ getRootProps }) => {
+              return <div {...getRootProps()}>{leftColHeader}</div>;
+            }}
+          </SidebarHeader>
+          <DateHeader
+            unit="month"
+            labelFormat="MMMM"
+            headerData={{ isMonth: true }}
+            intervalRenderer={intervalRenderer}
           />
-        )}
-      </>
-    );
-  }
-}
+          <DateHeader
+            unit="day"
+            labelFormat="D"
+            headerData={{ isMonth: false }}
+            intervalRenderer={intervalRenderer}
+          />
+        </TimelineHeaders>
+      </Timeline>
+      {draggedItem && (
+        <InfoLabel
+          item={draggedItem.item}
+          group={draggedItem.group}
+          time={draggedItem.time}
+        />
+      )}
+    </>
+  );
+};

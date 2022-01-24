@@ -6,7 +6,7 @@ import { useRouteEventsGet, useRouteExercisesGet } from "../../action/actions";
 
 const TimelineDashboard = () => {
   const { data: eventData, loading: fetchEventLoading } = useRouteEventsGet({});
-  const { data: groupData, loading: fetchGroupLoading } = useRouteExercisesGet({});
+  const { data: exerciseData, loading: fetchGroupLoading } = useRouteExercisesGet({});
 
   // const [eventData, setEventData] = useState<any[] | null>(null);
 
@@ -16,10 +16,10 @@ const TimelineDashboard = () => {
   //   }
   // }, [fetchEventLoading, fetchGroupLoading]);
 
-  return !fetchEventLoading && !fetchGroupLoading && eventData && groupData ? (
+  return !fetchEventLoading && !fetchGroupLoading && eventData && exerciseData ? (
     <Timetable
-      groups={groupData}
-      items={eventData}
+      groupData={exerciseData}
+      itemData={eventData}
       resizable={false}
       movable={false}
       leftColHeader="Group"

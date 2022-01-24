@@ -16,15 +16,17 @@ function getLast(tasks) {
 
 export default function prepareData({
   originalGroups,
-  originalItems
+  originalItems,
+  expandedGroups
 }: // stages,
 // resources,
 // workflows,
-// expandedWorkflows,
+// expandedGroups,
 // collapseTasks
 {
-  originalGroups: object[];
-  originalItems: object[];
+  originalGroups: Array<object>;
+  originalItems: Array<object>;
+  expandedGroups: Array<number>;
 }) {
   const groups = [];
   const items = [];
