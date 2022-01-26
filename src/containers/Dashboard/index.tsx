@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import Timetable from "./Timetable";
+import { Timetable } from "./Timetable";
 import { Preloader } from "../../components/Preloader";
 import { RestfulProvider } from "restful-react";
-import { useRouteEventsGet, useRouteExercisesGet } from "../../action/actions";
+import { useRouteEventsGet, useRouteGroupsGet } from "../../action/actions";
 
 const TimelineDashboard = () => {
-  const { data: eventData, loading: fetchEventLoading } = useRouteEventsGet({});
-  const { data: exerciseData, loading: fetchGroupLoading } = useRouteExercisesGet({});
+  const { data: events, loading: fetchEventLoading } = useRouteEventsGet({});
+  const { data: groups, loading: fetchGroupLoading } = useRouteGroupsGet({});
 
   // const [eventData, setEventData] = useState<any[] | null>(null);
 
@@ -16,10 +16,10 @@ const TimelineDashboard = () => {
   //   }
   // }, [fetchEventLoading, fetchGroupLoading]);
 
-  return !fetchEventLoading && !fetchGroupLoading && eventData && exerciseData ? (
+  return !fetchEventLoading && !fetchGroupLoading && events && groups ? (
     <Timetable
-      groupData={exerciseData}
-      itemData={eventData}
+      groupData={groups}
+      itemData={events}
       resizable={false}
       movable={false}
       leftColHeader="Group"

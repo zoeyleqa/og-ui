@@ -14,7 +14,7 @@ import {
 const exerciseTableHeader = [
   {
     Header: "Group",
-    accessor: "group.name"
+    accessor: "exercise_group.name"
   },
   {
     Header: "Exercise",

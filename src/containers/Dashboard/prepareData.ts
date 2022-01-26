@@ -1,139 +1,76 @@
-import moment from "moment";
+import dayjs from "dayjs";
 
-function getFirst(tasks) {
-  const starts = tasks.map(t => t.start_time);
-  starts.sort((a, b) => moment(a) - moment(b));
+export const prepareData = (
+  originalGroups: Array<{
+    id: string;
+    name: string;
+    group_exercises: Array<{ id: number; name: string }>;
+  }>,
+  originalItems: Array<{
+    id: number;
+    name: string;
+    start_at: Date;
+    end_at: Date;
+    SubGroupId: number;
+    event_exercise: {
+      background_color: string;
+      text_color: string;
+    } | null;
+  }>,
+  expandedGroups: Array<string | number>
+) => {
+  const allGroups: {
+    id: string | number;
+    title: string;
+    root?: boolean;
+    expanded?: boolean;
+  }[] = [];
+  const items: {
+    id: number;
+    group: string | number;
+    title: string;
+    start_time: number;
+    end_time: number;
+    itemProps: { style: { background: any; borderColor: any } };
+  }[] = [];
 
-  return starts[0];
-}
+  originalGroups.forEach(group => {
+    const expanded = expandedGroups.includes(`group-${group.id}`);
 
-function getLast(tasks) {
-  const ends = tasks.map(t => t.end_time);
-  ends.sort((a, b) => moment(b) - moment(a));
-
-  return ends[0];
-}
-
-export default function prepareData({
-  originalGroups,
-  originalItems,
-  expandedGroups
-}: // stages,
-// resources,
-// workflows,
-// expandedGroups,
-// collapseTasks
-{
-  originalGroups: Array<object>;
-  originalItems: Array<object>;
-  expandedGroups: Array<number>;
-}) {
-  const groups = [];
-  const items = [];
-  const tasks = [];
-
-  workflows.forEach(w => {
-    const expanded = expandedWorkflows.includes(`workflow-${w.id}`);
-
-    groups.push({
-      id: `workflow-${w.id}`,
-      title: w.name,
+    allGroups.push({
+      id: `group-${group.id}`,
+      title: group.name,
       root: true,
       expanded
     });
 
     if (expanded) {
-      w.resources.forEach(r => {
-        const resource = resources.find(({ id }) => id === r.resource);
-
-        groups.push({
-          id: `resource-${resource.id}`,
-          title: resource.name
-        });
-      });
+      group.group_exercises.forEach(
+        (subgroup: { id: number; name: string }) => {
+          allGroups.push({
+            id: subgroup.id,
+            title: subgroup.name
+          });
+        }
+      );
     }
   });
 
-  workflows.forEach(w => {
-    w.resources.forEach(r => {
-      r.tasks.forEach(t => {
-        const stage = stages.find(s => s.id === t.stage);
-
-        tasks.push({
-          workflow: w.id,
-          resource: r.resource,
-          stage: stage.id,
-          id: t.id,
-
-          title: stage.name,
-          start_time: moment(t.start),
-          end_time: moment(t.end),
-          itemProps: {
-            style: {
-              background: stage.color,
-              borderColor: stage.color
-            }
-          }
-        });
-      });
+  originalItems.forEach(event => {
+    items.push({
+      id: event.id,
+      group: event.SubGroupId,
+      title: event.name,
+      start_time: dayjs(event.start_at).valueOf(),
+      end_time: dayjs(event.end_at).valueOf(),
+      itemProps: {
+        style: {
+          background: event.event_exercise?.background_color || "red",
+          borderColor: event.event_exercise?.text_color || "white"
+        }
+      }
     });
   });
 
-  if (collapseTasks) {
-    workflows.forEach(w => {
-      stages.forEach(st => {
-        const stageTasks = tasks
-          .filter(t => t.workflow === w.id)
-          .filter(t => t.stage === st.id);
-
-        if (stageTasks.length) {
-          const t = stageTasks[0];
-
-          items.push({
-            ...t,
-            id: `workflow-${w.id}-stage-${t.stage}`,
-            group: `workflow-${t.workflow}`,
-            start_time: getFirst(stageTasks),
-            end_time: getLast(stageTasks)
-          });
-        }
-      });
-    });
-
-    resources.forEach(r => {
-      stages.forEach(st => {
-        const stageTasks = tasks
-          .filter(t => t.resource === r.id)
-          .filter(t => t.stage === st.id);
-
-        if (stageTasks.length) {
-          const t = stageTasks[0];
-
-          items.push({
-            ...t,
-            id: `resource-${r.id}-stage-${t.stage}`,
-            group: `resource-${t.resource}`,
-            start_time: getFirst(stageTasks),
-            end_time: getLast(stageTasks)
-          });
-        }
-      });
-    });
-  } else {
-    tasks.forEach(t => {
-      items.push({
-        ...t,
-        id: `workflow-task-${t.id}`,
-        group: `workflow-${t.workflow}`
-      });
-
-      items.push({
-        ...t,
-        id: `resource-task-${t.id}`,
-        group: `resource-${t.resource}`
-      });
-    });
-  }
-
-  return { groups, items };
-}
+  return { groups: allGroups, items };
+};

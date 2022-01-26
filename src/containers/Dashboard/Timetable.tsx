@@ -9,7 +9,7 @@ import Timeline, {
   TodayMarker
 } from "react-calendar-timeline";
 import InfoLabel from "./InfoLabel";
-import helper from "./prepareData.js";
+import * as helper from "./prepareData";
 import "react-calendar-timeline/lib/Timeline.css";
 import "./style.css";
 
@@ -17,32 +17,23 @@ dayjs.extend(duration);
 
 const keys = {
   groupIdKey: "id",
-  groupTitleKey: "name",
+  groupTitleKey: "title",
   groupRightTitleKey: "rightTitle",
   itemIdKey: "id",
-  itemTitleKey: "name",
+  itemTitleKey: "title",
   itemDivTitleKey: "title",
-  itemGroupKey: "event_exercise.group.id",
-  itemTimeStartKey: "start_at",
-  itemTimeEndKey: "end_at",
-  groupLabelKey: "name"
+  itemGroupKey: "group",
+  itemTimeStartKey: "start_time",
+  itemTimeEndKey: "end_time"
+  // groupLabelKey: "name"
 };
 
 interface TimetableProps {
-  groups: any;
-  items: any;
+  groupData: any;
+  itemData: any;
   resizable: boolean;
   movable: boolean;
   leftColHeader: string;
-}
-
-interface TimetableState {
-  groupData: any;
-  itemData: any;
-  defaultTimeStart: Date;
-  defaultTimeEnd: Date;
-  draggedItem: any;
-  expandedGroups: { [index: string | number]: any };
 }
 
 export const Timetable = ({
@@ -52,13 +43,16 @@ export const Timetable = ({
   movable,
   leftColHeader
 }: TimetableProps) => {
-  const [expandedGroups, setExpandedGroups] = useState<Array<number>>([]);
+  const [expandedGroups, setExpandedGroups] = useState<Array<string | number>>(
+    []
+  );
   const [draggedItem, setDraggedItem] = useState<Object | undefined>(undefined);
-  // this.isWeekendDay = this.isWeekendDay.bind(this);
-  // this.isCurrentDay = this.isCurrentDay.bind(this);
-  // this.itemRenderer = this.itemRenderer.bind(this);
-  // this.intervalRenderer = this.intervalRenderer.bind(this);
-  const { groups, items } = helper.prepareData(groupData, itemData, expandedGroups);
+
+  const { groups, items } = helper.prepareData(
+    groupData,
+    itemData,
+    expandedGroups
+  );
   const defaultTimeStart = dayjs().startOf("day").add(-7, "day").toDate();
   const defaultTimeEnd = dayjs().startOf("day").add(7, "day").toDate();
 
@@ -117,71 +111,87 @@ export const Timetable = ({
     );
   };
 
-  const toggleGroup = (id: number) => {
+  const toggleGroup = (id: string) => {
     setExpandedGroups([...expandedGroups, id]);
   };
 
-  const handleItemMove = (
-    itemId: any,
-    dragTime: number,
-    newGroupOrder: string | number
-  ) => {
-    const { items, groups } = this.state;
+  // const handleItemMove = (
+  //   itemId: any,
+  //   dragTime: number,
+  //   newGroupOrder: string | number
+  // ) => {
+  //   const group = groups.find([newGroupOrder]);
 
-    const group = groups[newGroupOrder];
+  //   items = items.map((item: { id: any; end: number; start: number }) =>
+  //     item.id === itemId
+  //       ? Object.assign({}, item, {
+  //           start: dragTime,
+  //           end: dragTime + (item.end - item.start),
+  //           group: group.id
+  //         })
+  //       : item
+  //   );
+  //   draggedItem = undefined;
 
-    this.setState({
-      items: items.map((item: { id: any; end: number; start: number }) =>
-        item.id === itemId
-          ? Object.assign({}, item, {
-              start: dragTime,
-              end: dragTime + (item.end - item.start),
-              group: group.id
-            })
-          : item
-      ),
-      draggedItem: undefined
-    });
+  //   console.log("Moved", itemId, dragTime, newGroupOrder);
+  // };
 
-    console.log("Moved", itemId, dragTime, newGroupOrder);
-  };
+  // const handleItemResize = (itemId: any, time: any, edge: string) => {
+  //   items.map((item: { id: any; start: any; end: any }) =>
+  //     item.id === itemId
+  //       ? Object.assign({}, item, {
+  //           start: edge === "left" ? time : item.start,
+  //           end: edge === "left" ? item.end : time
+  //         })
+  //       : item
+  //   );
+  //   draggedItem = undefined;
 
-  const handleItemResize = (itemId: any, time: any, edge: string) => {
-    const { items } = this.state;
+  //   console.log("Resized", itemId, time, edge);
+  // };
 
-    this.setState({
-      items: items.map((item: { id: any; start: any; end: any }) =>
-        item.id === itemId
-          ? Object.assign({}, item, {
-              start: edge === "left" ? time : item.start,
-              end: edge === "left" ? item.end : time
-            })
-          : item
-      ),
-      draggedItem: undefined
-    });
+  // const handleItemDrag = ({
+  //   itemId,
+  //   time,
+  //   newGroupOrder
+  // }: {
+  //   itemId: number;
+  //   time: Date;
+  //   newGroupOrder: number;
+  // }) => {
+  //   let item = this.state.draggedItem ? this.state.draggedItem.item : undefined;
+  //   if (!item) {
+  //     item = this.state.items.find((i: { id: any }) => i.id === itemId);
+  //   }
+  //   this.setState({
+  //     draggedItem: { item: item, group: this.state.groups[newGroupOrder], time }
+  //   });
+  // };
 
-    console.log("Resized", itemId, time, edge);
-  };
-
-  const handleItemDrag = ({
-    itemId,
-    time,
-    newGroupOrder
-  }: {
-    itemId: number;
-    time: Date;
-    newGroupOrder: number;
-  }) => {
-    let item = this.state.draggedItem ? this.state.draggedItem.item : undefined;
-    if (!item) {
-      item = this.state.items.find((i: { id: any }) => i.id === itemId);
-    }
-    this.setState({
-      draggedItem: { item: item, group: this.state.groups[newGroupOrder], time }
-    });
-  };
-
+  // hide (filter) the groups that are closed, for the rest, patch their "title" and add some callbacks or padding
+  const renderedGroups = groups.map(group => ({
+    ...group,
+    title: group.root ? (
+      <>
+        <button
+          onClick={() => {
+            if (group.expanded) {
+              setExpandedGroups(
+                expandedGroups.filter(openGroup => openGroup !== group.id)
+              );
+            } else {
+              setExpandedGroups([...expandedGroups, group.id]);
+            }
+          }}
+        >
+          {group.expanded ? "-" : "+"}
+        </button>{" "}
+        {group.title}
+      </>
+    ) : (
+      group.title
+    )
+  }));
   const isWeekendDay = (
     intervalContext: { interval: { startTime: { day: () => any } } },
     data: { isMonth: any }
@@ -204,74 +214,45 @@ export const Timetable = ({
       intervalContext.interval.startTime.isSame(data.currentDate, "day")
     );
   };
-
-  const intervalRenderer = ({
-    intervalContext,
-    getIntervalProps,
-    data,
-    isMonth
-  }: {
-    intervalContext: any;
-    getIntervalProps: any;
-    data: any;
-    isMonth: boolean;
-  }) => {
-    return (
-      <div
-        {...getIntervalProps()}
-        className={`rct-dateHeader ${
-          data.isMonth ? "rct-dateHeader-primary" : ""
-        }`}
-        onClick={() => {
-          return false;
-        }}
-      >
-        <span
-          style={{
-            position: data.isMonth ? "sticky" : "static",
-            marginRight: data.isMonth ? "auto" : "inherit",
-            left: "0",
-            padding: "0 1rem",
-            fontWeight:
-              this.isWeekendDay(intervalContext, data) ||
-              this.isCurrentDay(intervalContext, data)
-                ? "400"
-                : "300",
-            color: this.isCurrentDay(intervalContext, data) ? "#d32f2f" : "#000"
-          }}
-        >
-          {intervalContext.intervalText}
-        </span>
-      </div>
-    );
-  };
-
-  // hide (filter) the groups that are closed, for the rest, patch their "title" and add some callbacks or padding
-  // const newGroups = groups
-  //   .filter(
-  //     (g: { root: any; parent: string | number }) =>
-  //       g.root || expandedGroups[g.parent]
-  //   )
-  //   .map((group: { root: any; id: string; title: {} | null | undefined }) => {
-  //     return Object.assign({}, group, {
-  //       title: group.root ? (
-  //         <div
-  //           onClick={() => this.toggleGroup(parseInt(group.id))}
-  //           style={{ cursor: "pointer" }}
-  //         >
-  //           {expandedGroups[parseInt(group.id)] ? "[-]" : "[+]"} {group.title}
-  //         </div>
-  //       ) : (
-  //         <div style={{ paddingLeft: 20 }}>{group.title}</div>
-  //       )
-  //     });
-  //   });
+  // const intervalRenderer = ({
+  //   intervalContext,
+  //   getIntervalProps,
+  //   data
+  // }: IntervalRenderer<{isMonth: boolean}>) => {
+  //   return (
+  //     <div
+  //       {...getIntervalProps()}
+  //       className={`rct-dateHeader ${
+  //         data.isMonth ? "rct-dateHeader-primary" : ""
+  //       }`}
+  //       onClick={() => {
+  //         return false;
+  //       }}
+  //     >
+  //       <span
+  //         style={{
+  //           position: data.isMonth ? "sticky" : "static",
+  //           marginRight: data.isMonth ? "auto" : "inherit",
+  //           left: "0",
+  //           padding: "0 1rem",
+  //           fontWeight:
+  //             isWeekendDay(intervalContext, data) ||
+  //             isCurrentDay(intervalContext, data)
+  //               ? 400
+  //               : 300,
+  //           color: isCurrentDay(intervalContext, data) ? "#d32f2f" : "#000"
+  //         }}
+  //       >
+  //         {intervalContext.intervalText}
+  //       </span>
+  //     </div>
+  //   );
+  // };
 
   return (
     <>
       <Timeline
-        // groups={newGroups}
-        groups={groups}
+        groups={renderedGroups}
         items={items}
         keys={keys}
         sidebarContent={<div>Above The Left</div>}
@@ -292,8 +273,8 @@ export const Timetable = ({
         defaultTimeStart={defaultTimeStart}
         defaultTimeEnd={defaultTimeEnd}
         itemRenderer={itemRenderer}
-        onItemMove={handleItemMove}
-        onItemResize={handleItemResize}
+        // onItemMove={handleItemMove}
+        // onItemResize={handleItemResize}
       >
         <TimelineMarkers>
           <TodayMarker date={dayjs().toDate()} />
@@ -316,23 +297,23 @@ export const Timetable = ({
             unit="month"
             labelFormat="MMMM"
             headerData={{ isMonth: true }}
-            intervalRenderer={intervalRenderer}
+            // intervalRenderer={intervalRenderer}
           />
           <DateHeader
             unit="day"
             labelFormat="D"
             headerData={{ isMonth: false }}
-            intervalRenderer={intervalRenderer}
+            // intervalRenderer={intervalRenderer}
           />
         </TimelineHeaders>
       </Timeline>
-      {draggedItem && (
+      {/* {draggedItem && (
         <InfoLabel
           item={draggedItem.item}
           group={draggedItem.group}
           time={draggedItem.time}
         />
-      )}
+      )} */}
     </>
   );
 };
