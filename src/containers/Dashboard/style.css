@@ -155,3 +155,7 @@ button:focus {
   color: var(--color-white);
   cursor: pointer;
 }
+
+.default-item {
+  background-color: #d32f2f;
+}

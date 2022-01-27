@@ -6,7 +6,8 @@ import Timeline, {
   SidebarHeader,
   DateHeader,
   TimelineMarkers,
-  TodayMarker
+  TodayMarker,
+  IntervalRenderer
 } from "react-calendar-timeline";
 import InfoLabel from "./InfoLabel";
 import * as helper from "./prepareData";
@@ -77,18 +78,17 @@ export const Timetable = ({
     return (
       <div
         {...getItemProps({
+          // default a background color in case provided background_color is invalid
+          className: "default-item",
           style: {
-            backgroundColor,
-            color: item.color,
-            borderColor,
-            borderStyle: "solid",
-            borderWidth: 1,
-            borderRadius: 4,
-            borderLeftWidth: itemContext.selected ? 3 : 1,
-            borderRightWidth: itemContext.selected ? 3 : 1
-          },
-          onMouseDown: () => {
-            console.log("on item click", item);
+            display: "flex",
+            alignItems: "center",
+            background: item.itemProps.style.background || "#d32f2f", //dayjs().isAfter(item.start_time) ? "#aaa" : "#d32f2f",
+            border: `3px solid ${
+              itemContext.selected ? "#fff700" : "transparent"
+            }`,
+            borderRadius: "12.5px",
+            boxShadow: "rgba(0, 0, 0, 0.16) 0 0.3rem 0.6rem"
           }
         })}
       >
@@ -96,9 +96,11 @@ export const Timetable = ({
 
         <div
           style={{
-            height: itemContext.dimensions.height,
+            position: "sticky",
+            left: "0",
+            display: "inline-block",
             overflow: "hidden",
-            paddingLeft: 3,
+            padding: "0 1rem",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap"
           }}
@@ -111,8 +113,62 @@ export const Timetable = ({
     );
   };
 
-  const toggleGroup = (id: string) => {
-    setExpandedGroups([...expandedGroups, id]);
+  const isWeekendDay = (
+    intervalContext: { interval: { startTime: number } },
+    data: { isMonth: any } | undefined
+  ) => {
+    if (data?.isMonth) {
+      return false;
+    }
+    const day = dayjs(intervalContext.interval.startTime).day();
+    return day === 6 || day === 0; // Saturday or Sunday
+  };
+
+  const isCurrentDay = (
+    intervalContext: {
+      interval: { startTime: number };
+    },
+    data: { isMonth: boolean } | undefined
+  ) => {
+    return (
+      !data?.isMonth &&
+      dayjs().startOf('day').isSame(dayjs(intervalContext.interval.startTime), 'day')
+    );
+  };
+
+  const intervalRenderer = ({
+    intervalContext,
+    getIntervalProps,
+    data
+  }: IntervalRenderer<{ isMonth: boolean }>) => {
+    return (
+      <div
+        {...getIntervalProps()}
+        className={`rct-dateHeader ${
+          data?.isMonth ? "rct-dateHeader-primary" : ""
+        }`}
+        onClick={() => {
+          return false;
+        }}
+      >
+        <span
+          style={{
+            position: data?.isMonth ? "sticky" : "static",
+            marginRight: data?.isMonth ? "auto" : "inherit",
+            left: "0",
+            padding: "0 1rem",
+            fontWeight:
+              isWeekendDay(intervalContext, data) ||
+              isCurrentDay(intervalContext, data)
+                ? 600
+                : 300,
+            color: isCurrentDay(intervalContext, data) ? "#d32f2f" : "#000"
+          }}
+        >
+          {intervalContext.intervalText}
+        </span>
+      </div>
+    );
   };
 
   // const handleItemMove = (
@@ -192,28 +248,7 @@ export const Timetable = ({
       group.title
     )
   }));
-  const isWeekendDay = (
-    intervalContext: { interval: { startTime: { day: () => any } } },
-    data: { isMonth: any }
-  ) => {
-    if (data.isMonth) {
-      return false;
-    }
-    const day = intervalContext.interval.startTime.day();
-    return day === 6 || day === 0; // Saturday or Sunday
-  };
 
-  const isCurrentDay = (
-    intervalContext: {
-      interval: { startTime: { isSame: (arg0: any, arg1: string) => any } };
-    },
-    data: { isMonth: any; currentDate: any }
-  ) => {
-    return (
-      !data.isMonth &&
-      intervalContext.interval.startTime.isSame(data.currentDate, "day")
-    );
-  };
   // const intervalRenderer = ({
   //   intervalContext,
   //   getIntervalProps,
@@ -256,8 +291,8 @@ export const Timetable = ({
         items={items}
         keys={keys}
         sidebarContent={<div>Above The Left</div>}
-        sidebarWidth={150}
         // itemsSorted={true}
+        sidebarWidth={200}
         itemTouchSendsClick={false}
         stackItems
         itemHeightRatio={0.75}
@@ -297,13 +332,13 @@ export const Timetable = ({
             unit="month"
             labelFormat="MMMM"
             headerData={{ isMonth: true }}
-            // intervalRenderer={intervalRenderer}
+            intervalRenderer={data => (data ? intervalRenderer(data) : null)}
           />
           <DateHeader
             unit="day"
             labelFormat="D"
             headerData={{ isMonth: false }}
-            // intervalRenderer={intervalRenderer}
+            intervalRenderer={data => (data ? intervalRenderer(data) : null)}
           />
         </TimelineHeaders>
       </Timeline>
